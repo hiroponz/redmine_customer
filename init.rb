@@ -1,6 +1,16 @@
 # Redmine customer plugin
 require 'redmine'
 
+# Patches to the Redmine core.
+require 'dispatcher'
+require 'issue_patch'
+Dispatcher.to_prepare do
+  Issue.send(:include, IssuePatch)
+end
+
+# Hooks
+require_dependency 'customer_issue_hook'
+
 RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
 
 Redmine::Plugin.register :customer_plugin do
@@ -12,13 +22,5 @@ Redmine::Plugin.register :customer_plugin do
   url 'https://projects.littlestreamsoftware.com/projects/redmine-customers' if respond_to? :url
   author_url 'http://www.littlestreamsoftware.com' if respond_to? :author_url
 
-  
-  project_module :customer_module do
-    permission :view_customer, {:customers => [:show]}
-    permission :assign_customer, {:customers => [:assign, :select]}
-    permission :see_customer_list, {:customers => [:list]}
-    permission :edit_customer, {:customers => [:edit, :update, :new, :create, :destroy]}
-  end
-
-  menu :project_menu, :customers, {:controller => 'customers', :action => 'show'}, :caption => :customer_title
+  menu :top_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => 'Customers'
 end
