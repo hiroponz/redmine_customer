@@ -24,7 +24,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   def view_issues_form_details_bottom(context = { })
     if context[:project].module_enabled?('customer_module')
       select = context[:form].text_field :customer_id, :style => 'display: none'
-      text_field = text_field_tag :customer_text
+      text_field = text_field_tag :customer_text, context[:form].object.customer.to_s
       autocomplete = javascript_tag <<-JS
         new Ajax.Autocompleter(
           'customer_text', 
