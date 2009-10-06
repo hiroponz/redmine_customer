@@ -1,7 +1,7 @@
 pt:
   customer_title: Clientes
   label_customer: Cliente
-  label_customer_plural: Listagem de Clientes
+  label_customer_plural: Clientes
   label_customer_information: Detalhes do Cliente
   label_customer_edit_information: Editar Cliente
   label_customer_view: Ver

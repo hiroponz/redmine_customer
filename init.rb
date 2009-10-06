@@ -4,8 +4,10 @@ require 'redmine'
 # Patches to the Redmine core.
 require 'dispatcher'
 require 'issue_patch'
+require 'custom_fields_helper_patch'
 Dispatcher.to_prepare do
   Issue.send(:include, IssuePatch)
+  CustomFieldsHelper.send(:include, CustomFieldsHelperPatch)
 end
 
 # Hooks

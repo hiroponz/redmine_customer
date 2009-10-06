@@ -1,5 +1,7 @@
 class Customer < ActiveRecord::Base
   has_many :issues
+
+  acts_as_customizable
   
   # name or company is mandatory
   validates_presence_of :name, :if => :company_unsetted
