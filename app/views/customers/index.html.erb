@@ -6,11 +6,11 @@
   <table class="list">
     <% @customers.each do |customer| %>
       <tr class="<%= cycle('odd', 'even') %>">
-        <td><%= customer.pretty_name %></td>
+        <td><%= link_to customer, {:controller => 'customers', :action => 'show', :id => customer.id } %></td>
         <td align="right">
           <small>
-              <%= link_to_if_authorized l(:button_edit), {:controller => 'customers', :action => 'edit', :id => @project, :customer_id => customer.id}, :class => 'icon icon-edit' %>
-              <%= link_to_if_authorized l(:button_delete), {:controller => 'customers', :action => 'destroy', :id => @project, :customer_id => customer.id}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
+              <%= link_to l(:button_edit), {:controller => 'customers', :action => 'edit', :id => @project, :customer_id => customer.id}, :class => 'icon icon-edit' %>
+              <%= link_to l(:button_delete), {:controller => 'customers', :action => 'destroy', :id => @project, :customer_id => customer.id}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
           </small>
         </td>
       </tr>

@@ -1,0 +1,36 @@
+pt-BR:
+
+  date:
+    order: [:day, :month, :year]
+
+  customer_title: Clientes
+  label_customer: Cliente
+  label_customer_plural: Clientes
+  label_customer_information: Detalhes do Cliente
+  label_customer_edit_information: Editar Cliente
+  label_customer_view: Ver
+  label_customer_list: Listar
+  label_customer_new: Novo
+  field_customer: Cliente
+  field_customer_birthday: Data de Nascimento
+  field_customer_cpf: CPF
+  field_customer_rg: RG
+  field_customer_rg_expeditor: Orgão emissor
+  field_customer_name: Nome
+  field_customer_neighborhood: Bairro
+  field_customer_number: Número
+  field_customer_company: Empresa
+  field_customer_address: Endereço
+  field_customer_residential_phone: Telefone Residencial
+  field_customer_mobile_phone: Celular
+  field_customer_email: Email
+  field_customer_website: Site
+  field_customer_gender: Sexo
+  field_customer_gender_male: Masculino
+  field_customer_gender_female: Feminino
+  field_customer_favorite_contact: Forma de contato preferencial
+  field_customer_favorite_contact_email: E-mail
+  field_customer_favorite_contact_phone: Telefone
+  field_customer_favorite_contact_mail: Correspondência
+  notice_successful_save: Salvo com sucesso
+  notice_unsuccessful_save: Não foi possível salvar
