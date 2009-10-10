@@ -52,3 +52,14 @@
       :label=>l(:field_customer_favorite_contact) -%>
   </p>
 </div>
+
+<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" %>
+<%= javascript_include_tag "jquery.maskedinput.js", :plugin => "customer_plugin" %>
+<% javascript_tag do %>
+  jQuery.noConflict();
+  jQuery(document).ready(function() {
+    jQuery('#customer_cpf').mask('999.999.999-99')
+    jQuery('#customer_rg').mask('999.999.999')
+  });
+<% end %>
+
