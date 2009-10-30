@@ -24,5 +24,9 @@ Redmine::Plugin.register :customer_plugin do
   url 'https://projects.littlestreamsoftware.com/projects/redmine-customers' if respond_to? :url
   author_url 'http://www.littlestreamsoftware.com' if respond_to? :author_url
 
+  project_module :customer_plugin do
+    permission :manage_customers, :public => true
+  end
+
   menu :top_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => 'Clientes'
 end
