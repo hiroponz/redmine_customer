@@ -1,21 +1,33 @@
 en:
-  customer_title: Customer
+
+  customer_title: Customers
   label_customer: Customer
   label_customer_plural: Customers
-  label_customer_information: Customer Information
-  label_customer_edit_information: Editing Customer Information
-  label_customer_assign_to_project: Assign Customer to Project
+  label_customer_information: Customers details
+  label_customer_edit_information: Edit client
   label_customer_view: View
-  label_customer_assign: Assign
   label_customer_list: List
   label_customer_new: New
   field_customer: Customer
+  field_customer_birthday: Birthday
+  field_customer_cpf: CPF
+  field_customer_rg: RG
+  field_customer_rg_expeditor: RG Expeditor
   field_customer_name: Name
+  field_customer_neighborhood: Neighborhood
+  field_customer_number: Number
   field_customer_company: Company
   field_customer_address: Address
-  field_customer_phone: Phone
+  field_customer_residential_phone: Residential Phone
+  field_customer_mobile_phone: Mobile Phone
   field_customer_email: Email
   field_customer_website: Website
-  field_customer_skype: Skype
-  notice_successful_save: Saved
-  notice_unsuccessful_save: Could not save
+  field_customer_gender: Gender
+  field_customer_gender_male: Male
+  field_customer_gender_female: Felame
+  field_customer_favorite_contact: Favorite contact
+  field_customer_favorite_contact_email: E-mail
+  field_customer_favorite_contact_phone: Phone
+  field_customer_favorite_contact_mail: Mail
+  notice_successful_save: Successful save
+  notice_unsuccessful_save: Unsuccessful save
