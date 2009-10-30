@@ -7,12 +7,8 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   # * :issue => Issue being rendered
   #
   def view_issues_show_details_bottom(context = { })
-    if context[:project].module_enabled?('budget_module')
-      data = "<td><b>Customer:</b></td><td>#{html_escape context[:issue].customer unless context[:issue].customer.nil?}</td>"
-      return "<tr>#{data}<td></td></tr>"
-    else
-      return ''
-    end
+    data = "<td><b>#{l(:label_customer)}:</b></td><td>#{html_escape context[:issue].customer unless context[:issue].customer.nil?}</td>"
+    "<tr>#{data}<td></td></tr>"
   end
   
   # Renders a select tag with all the Customers
@@ -22,31 +18,27 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   # * :project => Current project
   #
   def view_issues_form_details_bottom(context = { })
-    if context[:project].module_enabled?('customer_module')
-      select = context[:form].text_field :customer_id, :style => 'display: none'
-      text_field = text_field_tag :customer_text, context[:form].object.customer.to_s
-      autocomplete = javascript_tag <<-JS
-        new Ajax.Autocompleter(
-          'customer_text', 
-          'customer_id_choices',
-          '#{ url_for(:controller => 'customers', :action => 'autocomplete') }',
-          { 
-            minChars: 3, 
-            frequency: 0.5, 
-            paramName: 'q',
-            afterUpdateElement: function(text, li) {
-              $("issue_customer_id").value = li.id;
-            }
-          });
-      JS
-      return "
-        <p>#{select}#{text_field}</p>
-        <div id=\"customer_id_choices\" class=\"autocomplete\"></div>
-        #{autocomplete}
-      "
-    else
-      return ''
-    end
+    select = context[:form].text_field :customer_id, :style => 'display: none'
+    text_field = text_field_tag :customer_text, context[:form].object.customer.to_s
+    autocomplete = javascript_tag <<-JS
+      new Ajax.Autocompleter(
+        'customer_text',
+        'customer_id_choices',
+        '#{ url_for(:controller => 'customers', :action => 'autocomplete') }',
+        {
+          minChars: 3,
+          frequency: 0.5,
+          paramName: 'q',
+          afterUpdateElement: function(text, li) {
+            $("issue_customer_id").value = li.id;
+          }
+        });
+    JS
+    return "
+      <p>#{select}#{text_field}</p>
+      <div id=\"customer_id_choices\" class=\"autocomplete\"></div>
+      #{autocomplete}
+    "
   end
   
   # Renders a select tag with all the Customers for the bulk edit page
@@ -55,16 +47,12 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   # * :project => Current project
   #
   def view_issues_bulk_edit_details_bottom(context = { })
-    if context[:project].module_enabled?('customer_module')
-      select = select_tag('customer_id',
-                               content_tag('option', l(:label_no_change_option), :value => '') +
-                               content_tag('option', l(:label_none), :value => 'none') +
-                               options_from_collection_for_select(Customer.all, :id, :to_s))
-    
-      return content_tag(:p, "<label>#{l(:customer_label)}: " + select + "</label>")
-    else
-      return ''
-    end
+    select = select_tag('customer_id',
+                             content_tag('option', l(:label_no_change_option), :value => '') +
+                             content_tag('option', l(:label_none), :value => 'none') +
+                             options_from_collection_for_select(Customer.all, :id, :to_s))
+
+    content_tag(:p, "<label>#{l(:customer_label)}: " + select + "</label>")
   end
   
   # Saves the Customer assignment to the issue
