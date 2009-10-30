@@ -5,6 +5,15 @@
     <%= f.text_field 'name', :label=>l(:field_customer_name) -%><span class="required">*</span>
   </p>
   <p>
+    <%= f.text_field 'cpf', :label=>l(:field_customer_cpf) -%><span class="required">*</span>
+  </p>
+  <p>
+    <%= f.text_field 'rg', :label=>l(:field_customer_rg) -%>
+  </p>
+  <p>
+    <%= f.text_field 'rg_expeditor', :label=>l(:field_customer_rg_expeditor) -%>
+  </p>
+  <p>
     <%= f.text_area 'address', :label=>l(:field_customer_address), :rows => 5 -%>
   </p>
   <p>
@@ -23,16 +32,7 @@
     <%= f.text_field 'email', :label=>l(:field_customer_email) -%>
   </p>
   <p>
-    <%= f.date_select 'birthday', :label=>l(:field_customer_birthday) -%>
-  </p>
-  <p>
-    <%= f.text_field 'cpf', :label=>l(:field_customer_cpf) -%>
-  </p>
-  <p>
-    <%= f.text_field 'rg', :label=>l(:field_customer_rg) -%>
-  </p>
-  <p>
-    <%= f.text_field 'rg_expeditor', :label=>l(:field_customer_rg_expeditor) -%>
+    <%= f.date_select 'birthday', :label=>l(:field_customer_birthday), :start_year => 1920, :end_year => Time.now.year, :include_blank => true -%>
   </p>
   <p>
     <%= f.select 'gender', 
