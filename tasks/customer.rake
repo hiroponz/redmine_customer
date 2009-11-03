@@ -70,7 +70,7 @@ end
 def with_mailer_turned_off
   class << Mailer
     def deliver_account_information(user, password)
-      logger.info "Customer::Email: Preventing an email to be sent to user #{user}"
+      logger.info "Customer::Email: Preventing an email to be sent to user #{user}" if logger && logger.info
     end
   end
 
