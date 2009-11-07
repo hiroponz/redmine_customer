@@ -1,5 +1,6 @@
 class Customer < ActiveRecord::Base
   has_many :issues
+  has_and_belongs_to_many :contact_forms
   belongs_to :neighborhood
 
   acts_as_customizable
@@ -27,7 +28,9 @@ class Customer < ActiveRecord::Base
   end
 
   def pretty_name
-    "#{name}, #{cpf}"
+    date = I18n.l(birthday) if birthday
+    cpf_text = cpf if cpf.present?
+    [name, date, cpf_text].compact.join(', ')
   end
 
   def to_s

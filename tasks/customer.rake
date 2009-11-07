@@ -1,6 +1,12 @@
 # encoding: UTF-8
 
 namespace :customer do
+  namespace :load_default_data do
+    ['E-mail', 'Telefone', 'Correspondência'].each do |contact_form|
+      ContactForm.create(:name => contact_form)
+    end
+  end
+
   namespace :email do
     desc <<-END_DESC
 Read emails from an IMAP server, create users but do not notifying them.
@@ -68,16 +74,21 @@ END_DESC
 end
 
 def with_mailer_turned_off
+  turn_of_mailer
+  yield
+  turn_on_mailer
+end
+
+def turn_off_mailer
   class << Mailer
     def deliver_account_information(user, password)
       logger.info "Customer::Email: Preventing an email to be sent to user #{user}" if logger && logger.info
     end
   end
+end
 
-  yield
-
+def turn_on_mailer
   class << Mailer
     remove_method :deliver_account_information
   end
 end
-

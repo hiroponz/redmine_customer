@@ -16,6 +16,7 @@ pt-BR:
   field_cpf: CPF
   field_rg: RG
   field_rg_expeditor: Orgão emissor
+  field_notes: Observações
   field_name: Nome
   field_neighborhood: Bairro
   field_neighborhood_other: Outro
@@ -29,9 +30,6 @@ pt-BR:
   field_gender: Sexo
   field_gender_male: Masculino
   field_gender_female: Feminino
-  field_favorite_contact: Forma de contato preferencial
-  field_favorite_contact_email: E-mail
-  field_favorite_contact_phone: Telefone
-  field_favorite_contact_mail: Correspondência
+  field_contact_form: Formas de contato
   notice_successful_save: Salvo com sucesso
   notice_unsuccessful_save: Não foi possível salvar

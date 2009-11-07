@@ -29,7 +29,7 @@
     <%= f.text_field 'rg_expeditor', :no_label => true -%>
   </p>
   <p>
-    <%= f.text_area 'address', :label => :field_address, :rows => 5 -%>
+    <%= f.text_area 'address', :rows => 5 -%>
   </p>
   <p>
     <%= f.text_field 'rg_expeditor' -%>
@@ -53,14 +53,23 @@
     <%= f.text_field 'email', :label => :field_email -%>
   </p>
   <p>
-    <%= f.select 'favorite_contact', 
-      [
-        [ l(:field_favorite_contact_email), :email],
-        [ l(:field_favorite_contact_phone), :phone],
-        [ l(:field_favorite_contact_mail), :mail]
-      ],
-      :label => :field_favorite_contact -%>
+    <%= f.text_area 'notes', :rows => 5 -%>
   </p>
+  <p>
+    <label><%= l(:field_contact_form) %></label>
+  </p>
+  <% ContactForm.all.each do |contact_form| %>
+    <p>
+      <%= 
+          check_box_tag('customer[contact_form_ids][]',
+                        contact_form.id,
+                        @customer.contact_forms.include?(contact_form),
+                        :id => "customer_contact_form_ids_#{contact_form.id}"
+                       )
+      -%>
+      <%= label_tag :contact_form, contact_form, :for => "customer_contact_form_ids_#{contact_form.id}", :class => 'left' %>
+    </p>
+  <% end %>
 </div>
 
 <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" %>

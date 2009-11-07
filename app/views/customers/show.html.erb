@@ -16,7 +16,15 @@
     <p><%= l(:field_rg) %>: <%= h @customer.rg %></p>
     <p><%= l(:field_rg_expeditor) %>: <%= h @customer.rg_expeditor %></p>
     <p><%= l(:field_gender) %>: <%= l "field_gender_#{@customer.gender}" %></p>
-    <p><%= l(:field_favorite_contact) %>: <%= l "field_favorite_contact_#{@customer.favorite_contact}" %></p>
+    <p>
+      <%= l(:field_contact_form) %>
+      <ul>
+        <% @customer.contact_forms.each do |contact_form| %>
+          <li><%= contact_form %></li>
+        <% end %>
+      </p>
+    </p>
+
   </div>
 <% else %>
   <p class="nodata"><%=l(:label_no_data)%></p>
