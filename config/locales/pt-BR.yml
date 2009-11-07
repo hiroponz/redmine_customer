@@ -12,25 +12,26 @@ pt-BR:
   label_customer_list: Listar
   label_customer_new: Novo
   field_customer: Cliente
-  field_customer_birthday: Data de Nascimento
-  field_customer_cpf: CPF
-  field_customer_rg: RG
-  field_customer_rg_expeditor: Orgão emissor
-  field_customer_name: Nome
-  field_customer_neighborhood: Bairro
-  field_customer_number: Número
-  field_customer_company: Empresa
-  field_customer_address: Endereço
-  field_customer_residential_phone: Telefone Residencial
-  field_customer_mobile_phone: Celular
-  field_customer_email: Email
-  field_customer_website: Site
-  field_customer_gender: Sexo
-  field_customer_gender_male: Masculino
-  field_customer_gender_female: Feminino
-  field_customer_favorite_contact: Forma de contato preferencial
-  field_customer_favorite_contact_email: E-mail
-  field_customer_favorite_contact_phone: Telefone
-  field_customer_favorite_contact_mail: Correspondência
+  field_birthday: Data de Nascimento
+  field_cpf: CPF
+  field_rg: RG
+  field_rg_expeditor: Orgão emissor
+  field_rg_expeditor: Orgão emissor
+  field_name: Nome
+  field_neighborhood: Bairro
+  field_number: Número
+  field_company: Empresa
+  field_address: Logradouro
+  field_residential_phone: Telefone Residencial
+  field_mobile_phone: Celular
+  field_email: Email
+  field_website: Site
+  field_gender: Sexo
+  field_gender_male: Masculino
+  field_gender_female: Feminino
+  field_favorite_contact: Forma de contato preferencial
+  field_favorite_contact_email: E-mail
+  field_favorite_contact_phone: Telefone
+  field_favorite_contact_mail: Correspondência
   notice_successful_save: Salvo com sucesso
   notice_unsuccessful_save: Não foi possível salvar

@@ -1,55 +1,62 @@
+<% content_for :header_tags do %>
+  <%= stylesheet_link_tag 'form', :plugin => :customer_plugin %> 
+<% end %>
+
 <%= error_messages_for 'customer' %>
 
 <div class="box"> 
   <p>
-    <%= f.text_field 'name', :label=>l(:field_customer_name) -%><span class="required">*</span>
+    <%= f.text_field 'name', :required => true -%>
   </p>
   <p>
-    <%= f.text_field 'cpf', :label=>l(:field_customer_cpf) -%><span class="required">*</span>
+    <%= f.text_field 'cpf' -%>
   </p>
   <p>
-    <%= f.text_field 'rg', :label=>l(:field_customer_rg) -%>
+    <%= f.text_field 'rg' -%>
+
+    <%= label_tag 'customer_rg_expeditor', l(:field_rg_expeditor), :class => 'left' -%>
+    <%= f.text_field 'rg_expeditor', :no_label => true -%>
   </p>
   <p>
-    <%= f.text_field 'rg_expeditor', :label=>l(:field_customer_rg_expeditor) -%>
+    <%= f.text_area 'address', :label => :field_address, :rows => 5 -%>
   </p>
   <p>
-    <%= f.text_area 'address', :label=>l(:field_customer_address), :rows => 5 -%>
+    <%= f.text_field 'rg_expeditor' -%>
   </p>
   <p>
-    <%= f.text_field 'neighborhood', :label=>l(:field_customer_neighborhood) -%>
+    <%= f.select 'neighborhood_id', Neighborhood.all.collect {|n| [n.name, n.id]} -%>
   </p>
   <p>
-    <%= f.text_field 'number', :label=>l(:field_customer_number) -%>
+    <%= f.text_field 'number' -%>
   </p>
   <p>
-    <%= f.text_field 'residential_phone', :label=>l(:field_customer_residential_phone) -%>
+    <%= f.text_field 'residential_phone' -%>
   </p>
   <p>
-    <%= f.text_field 'mobile_phone', :label=>l(:field_customer_mobile_phone) -%>
+    <%= f.text_field 'mobile_phone' -%>
   </p>
   <p>
-    <%= f.text_field 'email', :label=>l(:field_customer_email) -%>
+    <%= f.text_field 'email', :label => :field_email -%>
   </p>
   <p>
-    <%= f.date_select 'birthday', :label=>l(:field_customer_birthday), :start_year => 1920, :end_year => Time.now.year, :include_blank => true -%>
+    <%= f.date_select 'birthday', :label => :field_birthday, :start_year => 1920, :end_year => Time.now.year, :include_blank => true -%>
   </p>
   <p>
     <%= f.select 'gender', 
       [
-        [l(:field_customer_gender_male), :male],
-        [l(:field_customer_gender_female), :female]
+        [ l(:field_gender_male), :male],
+        [ l(:field_gender_female), :female]
       ],
-      :label=>l(:field_customer_gender) -%>
+      :label => :field_gender -%>
   </p>
   <p>
     <%= f.select 'favorite_contact', 
       [
-        [l(:field_customer_favorite_contact_email), :email],
-        [l(:field_customer_favorite_contact_phone), :phone],
-        [l(:field_customer_favorite_contact_mail), :mail]
+        [ l(:field_favorite_contact_email), :email],
+        [ l(:field_favorite_contact_phone), :phone],
+        [ l(:field_favorite_contact_mail), :mail]
       ],
-      :label=>l(:field_customer_favorite_contact) -%>
+      :label => :field_favorite_contact -%>
   </p>
 </div>
 
@@ -60,7 +67,7 @@
   jQuery.noConflict();
   jQuery(document).ready(function() {
     jQuery('#customer_cpf').mask('999.999.999-99')
-    jQuery('#customer_rg').mask('999.999.999')
+
     jQuery('#main form').validate({
       rules: {
         'customer[name]': 'required',

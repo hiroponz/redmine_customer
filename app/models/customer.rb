@@ -1,5 +1,6 @@
 class Customer < ActiveRecord::Base
   has_many :issues
+  belongs_to :neighborhood
 
   acts_as_customizable
   

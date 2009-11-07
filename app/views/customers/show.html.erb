@@ -4,19 +4,19 @@
 
 <% unless @customer.nil? -%>
   <div class="box">
-    <p><%= l(:field_customer_name) %>: <%= h @customer.name %></p>
-    <p><%= l(:field_customer_address) %>: <%= h @customer.address %></p>
-    <p><%= l(:field_customer_neighborhood) %>: <%= h @customer.neighborhood %></p>
-    <p><%= l(:field_customer_number) %>: <%= h @customer.number %></p>
-    <p><%= l(:field_customer_residential_phone) %>: <%= h @customer.residential_phone %></p>
-    <p><%= l(:field_customer_mobile_phone) %>: <%= h @customer.mobile_phone %></p>
-    <p><%= l(:field_customer_email) %>: <%= h @customer.email %></p>
-    <p><%= l(:field_customer_birthday) %>: <%= @customer.birthday %></p>
-    <p><%= l(:field_customer_cpf) %>: <%= h @customer.cpf %></p>
-    <p><%= l(:field_customer_rg) %>: <%= h @customer.rg %></p>
-    <p><%= l(:field_customer_rg_expeditor) %>: <%= h @customer.rg_expeditor %></p>
-    <p><%= l(:field_customer_gender) %>: <%= l "field_customer_gender_#{@customer.gender}" %></p>
-    <p><%= l(:field_customer_favorite_contact) %>: <%= l "field_customer_favorite_contact_#{@customer.favorite_contact}" %></p>
+    <p><%= l(:field_name) %>: <%= h @customer.name %></p>
+    <p><%= l(:field_address) %>: <%= h @customer.address %></p>
+    <p><%= l(:field_neighborhood) %>: <%= h @customer.neighborhood %></p>
+    <p><%= l(:field_number) %>: <%= h @customer.number %></p>
+    <p><%= l(:field_residential_phone) %>: <%= h @customer.residential_phone %></p>
+    <p><%= l(:field_mobile_phone) %>: <%= h @customer.mobile_phone %></p>
+    <p><%= l(:field_email) %>: <%= h @customer.email %></p>
+    <p><%= l(:field_birthday) %>: <%= @customer.birthday %></p>
+    <p><%= l(:field_cpf) %>: <%= h @customer.cpf %></p>
+    <p><%= l(:field_rg) %>: <%= h @customer.rg %></p>
+    <p><%= l(:field_rg_expeditor) %>: <%= h @customer.rg_expeditor %></p>
+    <p><%= l(:field_gender) %>: <%= l "field_gender_#{@customer.gender}" %></p>
+    <p><%= l(:field_favorite_contact) %>: <%= l "field_favorite_contact_#{@customer.favorite_contact}" %></p>
   </div>
 <% else %>
   <p class="nodata"><%=l(:label_no_data)%></p>
