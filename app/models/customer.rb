@@ -17,6 +17,15 @@ class Customer < ActiveRecord::Base
 
   end
 
+  def neighborhood_other
+  end
+
+  def neighborhood_other=(value)
+    if value.present?
+      self.neighborhood = Neighborhood.create(:name => value)
+    end
+  end
+
   def pretty_name
     "#{name}, #{cpf}"
   end

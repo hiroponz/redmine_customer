@@ -16,9 +16,9 @@ pt-BR:
   field_cpf: CPF
   field_rg: RG
   field_rg_expeditor: Orgão emissor
-  field_rg_expeditor: Orgão emissor
   field_name: Nome
   field_neighborhood: Bairro
+  field_neighborhood_other: Outro
   field_number: Número
   field_company: Empresa
   field_address: Logradouro
