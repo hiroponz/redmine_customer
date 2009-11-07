@@ -1,7 +1,8 @@
 # encoding: UTF-8
 
 namespace :customer do
-  namespace :load_default_data do
+  desc 'Carrega formas de contato padrões'
+  task :load_default_data => :environment do
     ['E-mail', 'Telefone', 'Correspondência'].each do |contact_form|
       ContactForm.create(:name => contact_form)
     end
