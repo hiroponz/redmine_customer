@@ -12,6 +12,15 @@ namespace :customer do
     desc <<-END_DESC
 Read emails from an IMAP server, create users but do not notifying them.
 
+General options:
+  unknown_user=ACTION      how to handle emails from an unknown user
+                           ACTION can be one of the following values:
+                           ignore: email is ignored (default)
+                           accept: accept as anonymous user
+                           create: create a user account but do not notificate user
+                           notify: create a user account
+        
+
 Available IMAP options:
   host=HOST                IMAP server host (default: 127.0.0.1)
   port=PORT                IMAP server port (default: 143)
@@ -52,32 +61,17 @@ Examples:
     allow_override=tracker,priority
 END_DESC
     task :receive_imap => :environment do
-      imap_options = {:host => ENV['host'],
-                      :port => ENV['port'],
-                      :ssl => ENV['ssl'],
-                      :username => ENV['username'],
-                      :password => ENV['password'],
-                      :folder => ENV['folder'],
-                      :move_on_success => ENV['move_on_success'],
-                      :move_on_failure => ENV['move_on_failure']}
-                      
-      options = { :issue => {} }
-      %w(project status tracker category priority).each { |a| options[:issue][a.to_sym] = ENV[a] if ENV[a] }
-      options[:allow_override] = ENV['allow_override'] if ENV['allow_override']
-
-      options[:unknown_user] = 'create'
-
-      with_mailer_turned_off do
-        Redmine::IMAP.check(imap_options, options)
+      if ENV['unknown_user'] == 'create'
+        turn_off_mailer
       end
+
+      if ENV['unknown_user'] == 'notify'
+        ENV['unknown_user'] = 'create'
+      end
+
+      Rake::Task['redmine:email:receive_imap'].invoke
     end
   end
-end
-
-def with_mailer_turned_off
-  turn_of_mailer
-  yield
-  turn_on_mailer
 end
 
 def turn_off_mailer
@@ -88,8 +82,3 @@ def turn_off_mailer
   end
 end
 
-def turn_on_mailer
-  class << Mailer
-    remove_method :deliver_account_information
-  end
-end
