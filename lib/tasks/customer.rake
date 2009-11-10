@@ -18,6 +18,7 @@ General options:
                            ignore: email is ignored (default)
                            accept: accept as anonymous user
                            create: create a user account but do not notificate user
+                           customer: create a customer
                            notify: create a user account
         
 
@@ -65,11 +66,25 @@ END_DESC
         turn_off_mailer
       end
 
+      if ENV['unknown_user'] == 'customer'
+        turn_off_mailer
+        turn_on_customer_creation
+      end
+
       if ENV['unknown_user'] == 'notify'
         ENV['unknown_user'] = 'create'
       end
 
       Rake::Task['redmine:email:receive_imap'].invoke
+    end
+  end
+end
+
+def turn_on_customer_creation
+  class << MailHandler
+    def create_user_from_email(email)
+      Customer.from_email(email)
+      nil #so he doesn't think we created an user
     end
   end
 end

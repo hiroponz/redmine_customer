@@ -36,4 +36,15 @@ class Customer < ActiveRecord::Base
   def to_s
     pretty_name
   end
+
+  def self.from_email(email)
+    addr = email.from_addrs.to_a.first
+    if addr && !addr.spec.blank?
+      customer = Customer.new
+      customer.mail = addr.spec
+      customer.name = addr.name.blank? ? addr.spec.gsub(/@.*$/, '') : addr.name
+      
+      customer.save ? customer : nil
+    end
+  end
 end
