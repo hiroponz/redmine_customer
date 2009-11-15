@@ -8,6 +8,20 @@ namespace :customer do
     end
   end
 
+  desc 'Força retirada de tudo que plugin colocou no banco'
+  task :drop => :environment do
+    sql = <<-SQL
+      drop table customers;
+      alter table issues drop column customer_id;
+      drop table neighborhoods;
+      drop table contact_forms;
+      drop table contact_forms_customers;
+      delete from schema_migrations where version like '%-customer_plugin';
+    SQL
+
+    ActiveRecord::Base.connection.execute(sql)
+  end
+
   namespace :email do
     desc <<-END_DESC
 Read emails from an IMAP server, create users but do not notifying them.
