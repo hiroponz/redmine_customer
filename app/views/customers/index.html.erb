@@ -6,11 +6,21 @@
   <table class="list">
     <% @customers.each do |customer| %>
       <tr class="<%= cycle('odd', 'even') %>">
-        <td><%= link_to customer, {:controller => 'customers', :action => 'show', :id => customer.id } %></td>
+        <td><%= link_to customer, {:controller => 'customers', :action => 'show', :project_id => params[:project_id], :id => customer } %></td>
         <td align="right">
           <small>
-              <%= link_to l(:button_edit), {:controller => 'customers', :action => 'edit', :id => customer.id}, :class => 'icon icon-edit' %>
-              <%= link_to l(:button_delete), {:controller => 'customers', :action => 'destroy', :id => customer.id}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
+              <%= link_to l(:button_edit), {:controller => 'customers', :action => 'edit', :project_id => params[:project_id], :id => customer}, :class => 'icon icon-edit' %>
+              <%= link_to l(:button_delete), {:controller => 'customers', :action => 'destroy', :project_id => params[:project_id], :id => customer}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
+              <%= link_to 'Tarefas', {
+                :controller => 'issues',
+                :action => 'index',
+                :project_id => params[:project_id],
+                :set_filter => 1,
+                :fields => [:customer_id],
+                :operators => {:customer_id => '=' },
+                :values => {:customer_id => customer.id}
+              }
+              %>
           </small>
         </td>
       </tr>

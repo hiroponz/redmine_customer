@@ -8,6 +8,7 @@ require 'project_patch'
 Dispatcher.to_prepare do
   Issue.send(:include, IssuePatch)
   Project.send(:include, ProjectPatch)
+  Query.send(:include, QueryPatch)
 end
 
 # Hooks
