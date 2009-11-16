@@ -15,7 +15,7 @@ require_dependency 'customer_issue_hook'
 
 RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
 
-Redmine::Plugin.register :customer_plugin do
+Redmine::Plugin.register 'customer-plugin' do
   name 'Customer plugin'
   author 'Eric Davis'
   description 'This is a plugin for Redmine that can be used to track basic customer information'
@@ -24,7 +24,7 @@ Redmine::Plugin.register :customer_plugin do
   url 'https://projects.littlestreamsoftware.com/projects/redmine-customers' if respond_to? :url
   author_url 'http://www.littlestreamsoftware.com' if respond_to? :author_url
 
-  project_module :customer_plugin do
+  project_module 'customer-plugin' do
     permission :manage_customers, :public => true
   end
 

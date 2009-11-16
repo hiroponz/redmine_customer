@@ -17,6 +17,7 @@ namespace :customer do
       drop table contact_forms;
       drop table contact_forms_customers;
       delete from schema_migrations where version like '%-customer_plugin';
+      delete from schema_migrations where version like '%-customer-plugin';
     SQL
 
     ActiveRecord::Base.connection.execute(sql)

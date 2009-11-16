@@ -7,7 +7,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   # * :issue => Issue being rendered
   #
   def view_issues_show_details_bottom(context = { })
-    if context[:project].module_enabled?('customer_plugin')
+    if context[:project].module_enabled?('customer-plugin')
       data = "<td><b>#{l(:label_customer)}:</b></td><td>#{html_escape context[:issue].customer unless context[:issue].customer.nil?}</td>"
       "<tr>#{data}<td></td></tr>"
     end
@@ -20,7 +20,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   # * :project => Current project
   #
   def view_issues_form_details_bottom(context = { })
-    if context[:project].module_enabled?('customer_plugin')
+    if context[:project].module_enabled?('customer-plugin')
       select = context[:form].text_field :customer_id, :style => 'display: none'
       text_field = text_field_tag :customer_text, context[:form].object.customer.to_s
       autocomplete = javascript_tag <<-JS
@@ -51,7 +51,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   # * :project => Current project
   #
   def view_issues_bulk_edit_details_bottom(context = { })
-    if context[:project].module_enabled?('customer_plugin')
+    if context[:project].module_enabled?('customer-plugin')
       select = select_tag('customer_id',
                                content_tag('option', l(:label_no_change_option), :value => '') +
                                content_tag('option', l(:label_none), :value => 'none') +
@@ -68,7 +68,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   # * :params => HTML parameters
   #
   def controller_issues_bulk_edit_before_save(context = { })
-    if context[:project].module_enabled?('customer_plugin')
+    if context[:project].module_enabled?('customer-plugin')
       case true
 
       when context[:params][:customer_id].blank?
