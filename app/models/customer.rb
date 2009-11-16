@@ -2,6 +2,7 @@ class Customer < ActiveRecord::Base
   has_many :issues
   has_and_belongs_to_many :contact_forms
   belongs_to :neighborhood
+  belongs_to :address_type
 
   acts_as_customizable
   
@@ -9,6 +10,8 @@ class Customer < ActiveRecord::Base
 
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, 
     :allow_nil => true, :allow_blank => true
+
+  before_save :remove_address_type, :if => 'address.blank?'
   
   def self.search(query)
     find :all, :conditions => [
@@ -46,5 +49,11 @@ class Customer < ActiveRecord::Base
       
       customer.save ? customer : nil
     end
+  end
+
+  private
+
+  def remove_address_type
+    self.address_type = nil
   end
 end

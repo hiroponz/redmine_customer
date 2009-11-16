@@ -29,16 +29,19 @@
     <%= f.text_field 'rg_expeditor', :no_label => true -%>
   </p>
   <p>
-    <%= f.text_area 'address', :rows => 5 -%>
+    <%= f.select 'address_type_id', AddressType.all.collect {|a| [a.name, a.id]} -%>
+
+    <%= label_tag 'address', l(:field_address), :class => 'left' -%>
+    <%= f.text_field 'address', :no_label => true -%>
+  </p>
+  <p>
+    <%= f.text_field 'number' -%>
   </p>
   <p>
     <%= f.select 'neighborhood_id', Neighborhood.all.collect {|n| [n.name, n.id]}, :include_blank => true -%>
 
     <%= label_tag 'customer_neighborhood_other', l(:field_neighborhood_other), :class => 'left' -%>
     <%= f.text_field 'neighborhood_other', :no_label => true -%>
-  </p>
-  <p>
-    <%= f.text_field 'number' -%>
   </p>
   <p>
     <%= f.text_field 'residential_phone', :class => 'phone' -%>

@@ -5,7 +5,7 @@
 <% unless @customer.nil? -%>
   <div class="box">
     <p><%= l(:field_name) %>: <%= h @customer.name %></p>
-    <p><%= l(:field_address) %>: <%= h @customer.address %></p>
+    <p><%= l(:field_address) %>: <%= h "#{@customer.address_type} #{@customer.address}" %></p>
     <p><%= l(:field_neighborhood) %>: <%= h @customer.neighborhood %></p>
     <p><%= l(:field_number) %>: <%= h @customer.number %></p>
     <p><%= l(:field_residential_phone) %>: <%= h @customer.residential_phone %></p>

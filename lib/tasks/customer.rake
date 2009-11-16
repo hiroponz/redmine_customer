@@ -3,8 +3,25 @@
 namespace :customer do
   desc 'Carrega formas de contato padrões'
   task :load_default_data => :environment do
-    ['E-mail', 'Telefone', 'Correspondência'].each do |contact_form|
-      ContactForm.create(:name => contact_form)
+    ['E-mail', 'Telefone', 'Correspondência'].each do |name|
+      ContactForm.create(:name => name)
+    end
+    ['Rua', 'Av.'].each do |name|
+      AddressType.create(:name => name)
+    end
+  end
+
+  desc 'Cadastra bairros'
+  task :cadastra_bairros => :environment do
+    ENV['bairros'].split(',').each do |name|
+      Neighborhood.create :name => name.strip
+    end
+  end
+
+  desc 'Cadastra tipos de logradouro'
+  task :cadastra_tipos_logradouro => :environment do
+    ENV['tipos'].split(',').each do |name|
+      AddressType.create :name => name.strip
     end
   end
 
