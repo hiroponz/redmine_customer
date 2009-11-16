@@ -32,9 +32,6 @@
     <%= f.text_area 'address', :rows => 5 -%>
   </p>
   <p>
-    <%= f.text_field 'rg_expeditor' -%>
-  </p>
-  <p>
     <%= f.select 'neighborhood_id', Neighborhood.all.collect {|n| [n.name, n.id]}, :include_blank => true -%>
 
     <%= label_tag 'customer_neighborhood_other', l(:field_neighborhood_other), :class => 'left' -%>
