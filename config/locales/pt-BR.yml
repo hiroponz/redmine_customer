@@ -24,6 +24,7 @@ pt-BR:
   field_company: Empresa
   field_address: Logradouro
   field_address_type: Tipo
+  field_obs: Complemento
   field_residential_phone: Telefone Residencial
   field_mobile_phone: Celular
   field_email: Email
