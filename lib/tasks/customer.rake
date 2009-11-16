@@ -3,7 +3,7 @@
 namespace :customer do
   desc 'Carrega formas de contato padrões'
   task :load_default_data => :environment do
-    ['E-mail', 'Telefone', 'Correspondência'].each do |name|
+    ['E-mail', 'Celular', 'Telefone Residencial', 'Correspondência'].each do |name|
       ContactForm.create(:name => name)
     end
     ['Rua', 'Av.'].each do |name|
