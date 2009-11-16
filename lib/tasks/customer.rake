@@ -10,17 +10,22 @@ namespace :customer do
 
   desc 'Força retirada de tudo que plugin colocou no banco'
   task :drop => :environment do
-    sql = <<-SQL
-      drop table customers;
-      alter table issues drop column customer_id;
-      drop table neighborhoods;
-      drop table contact_forms;
-      drop table contact_forms_customers;
-      delete from schema_migrations where version like '%-customer_plugin';
-      delete from schema_migrations where version like '%-customer-plugin';
-    SQL
+    queries = [
+      "drop table customers;",
+      "alter table issues drop column customer_id;",
+      "drop table neighborhoods;",
+      "drop table contact_forms;",
+      "drop table contact_forms_customers;",
+      "delete from schema_migrations where version like '%-customer_plugin';",
+      "delete from schema_migrations where version like '%-customer-plugin';"
+    ]
 
-    ActiveRecord::Base.connection.execute(sql)
+    queries.each do |query|
+      begin
+        ActiveRecord::Base.connection.execute(query)
+      rescue
+      end
+    end
   end
 
   namespace :email do
