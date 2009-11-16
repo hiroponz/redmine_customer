@@ -23,7 +23,8 @@ namespace :customer do
     queries.each do |query|
       begin
         ActiveRecord::Base.connection.execute(query)
-      rescue
+      rescue Exception => e
+        puts "#{query} falhou: #{e}"
       end
     end
   end
