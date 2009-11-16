@@ -4,10 +4,10 @@ require 'redmine'
 # Patches to the Redmine core.
 require 'dispatcher'
 require 'issue_patch'
-require 'custom_fields_helper_patch'
+require 'project_patch'
 Dispatcher.to_prepare do
   Issue.send(:include, IssuePatch)
-  CustomFieldsHelper.send(:include, CustomFieldsHelperPatch)
+  Project.send(:include, ProjectPatch)
 end
 
 # Hooks
@@ -25,8 +25,9 @@ Redmine::Plugin.register 'customer-plugin' do
   author_url 'http://www.littlestreamsoftware.com' if respond_to? :author_url
 
   project_module 'customer-plugin' do
-    permission :manage_customers, :public => true
+    permission :manage_customers, :customers => [:new, :create, :edit, :update, :destroy], :public => true
+    permission :view_customers, :customers => [:index, :show], :public => true
   end
 
-  menu :top_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => 'Clientes'
+  menu :project_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => 'Clientes', :param => :project_id, :after => :files
 end
