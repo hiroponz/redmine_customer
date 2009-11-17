@@ -52,6 +52,10 @@ class Customer < ActiveRecord::Base
     end
   end
 
+  def self.list_for_select
+    all.collect {|c| [c.to_s, c.id.to_s]}
+  end
+
   private
 
   def remove_address_type
