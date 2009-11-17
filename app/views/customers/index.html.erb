@@ -11,17 +11,7 @@
           <small>
               <%= link_to l(:button_edit), {:controller => 'customers', :action => 'edit', :project_id => params[:project_id], :id => customer}, :class => 'icon icon-edit' %>
               <%= link_to l(:button_delete), {:controller => 'customers', :action => 'destroy', :project_id => params[:project_id], :id => customer}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
-              <%= link_to 'Tarefas', {
-                :controller => 'issues',
-                :action => 'index',
-                :project_id => params[:project_id],
-                :set_filter => true,
-                :fields => [:customer_id],
-                :operators => {:customer_id => '=' },
-                :values => {:customer_id => [customer.id]}
-              },
-              :class => 'icon icon-folder'
-              %>
+              <%= link_to_tasks customer %>
           </small>
         </td>
       </tr>
