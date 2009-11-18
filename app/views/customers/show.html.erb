@@ -4,32 +4,45 @@
 
 <% unless @customer.nil? -%>
   <div class="box">
-    <p><%= l(:field_name) %>: <%= h @customer.name %></p>
-    <p><%= l(:field_address) %>: <%= h "#{@customer.address_type} #{@customer.address}" %></p>
-    <p><%= l(:field_number) %>: <%= h @customer.number %></p>
-    <p><%= l(:field_neighborhood) %>: <%= h @customer.neighborhood %></p>
-    <p><%= l(:field_obs) %>: <%= h @customer.obs %></p>
-    <p><%= l(:field_residential_phone) %>: <%= h @customer.residential_phone %></p>
-    <p><%= l(:field_mobile_phone) %>: <%= h @customer.mobile_phone %></p>
-    <p><%= l(:field_email) %>: <%= h @customer.email %></p>
-    <p><%= l(:field_birthday) %>: <%= @customer.birthday %></p>
-    <p><%= l(:field_cpf) %>: <%= h @customer.cpf %></p>
-    <p><%= l(:field_rg) %>: <%= h @customer.rg %></p>
-    <p><%= l(:field_rg_expeditor) %>: <%= h @customer.rg_expeditor %></p>
-    <p><%= l(:field_gender) %>: <%= l "field_gender_#{@customer.gender}" %></p>
-    <p>
-      <%= l(:field_contact_form) %>
-      <ul>
-        <% @customer.contact_forms.each do |contact_form| %>
-          <li><%= contact_form %></li>
-        <% end %>
+    <p><%= link_to "#{@customer} - Detalhes", '#', :class => 'header' %> | <%= link_to_tasks @customer %></p>
+    <div class="details">
+      <p><%= l(:field_name) %>: <%= h @customer.name %></p>
+      <p><%= l(:field_address) %>: <%= h "#{@customer.address_type} #{@customer.address}" %></p>
+      <p><%= l(:field_number) %>: <%= h @customer.number %></p>
+      <p><%= l(:field_neighborhood) %>: <%= h @customer.neighborhood %></p>
+      <p><%= l(:field_obs) %>: <%= h @customer.obs %></p>
+      <p><%= l(:field_residential_phone) %>: <%= h @customer.residential_phone %></p>
+      <p><%= l(:field_mobile_phone) %>: <%= h @customer.mobile_phone %></p>
+      <p><%= l(:field_email) %>: <%= h @customer.email %></p>
+      <p><%= l(:field_birthday) %>: <%= @customer.birthday %></p>
+      <p><%= l(:field_cpf) %>: <%= h @customer.cpf %></p>
+      <p><%= l(:field_rg) %>: <%= h @customer.rg %></p>
+      <p><%= l(:field_rg_expeditor) %>: <%= h @customer.rg_expeditor %></p>
+      <p><%= l(:field_gender) %>: <%= l "field_gender_#{@customer.gender}" %></p>
+      <p>
+        <%= l(:field_contact_form) %>
+        <ul>
+          <% @customer.contact_forms.each do |contact_form| %>
+            <li><%= contact_form %></li>
+          <% end %>
+        </p>
       </p>
-    </p>
-    <p><%= link_to_tasks @customer %></p>
+    </div>
   </div>
+  <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" %>
+  <% javascript_tag do %>
+    jQuery.noConflict();
+    jQuery(document).ready(function(){
+      //jQuery('.details').hide();
+      jQuery('.header').click(function(){
+        jQuery('.details').slideToggle();
+      });
+    });
+  <% end %>
 <% else %>
   <p class="nodata"><%=l(:label_no_data)%></p>
 <% end %>
+
 
 <% content_for(:header_tags) do %>
   <style type="text/css">

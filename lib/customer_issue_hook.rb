@@ -8,7 +8,11 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   #
   def view_issues_show_details_bottom(context = { })
     if context[:project].module_enabled?('customer-plugin')
-      data = "<td><b>#{l(:label_customer)}:</b></td><td>#{html_escape context[:issue].customer unless context[:issue].customer.nil?}</td>"
+      data = "<td><b>#{l(:label_customer)}:</b></td>"
+      if customer = context[:issue].customer
+        customer_link = link_to customer.to_s, {:controller => 'customers', :action => 'show', :project_id => customer.project_id, :id => customer }
+        data << "<td>#{customer_link unless customer.nil?}</td>"
+      end
       "<tr>#{data}<td></td></tr>"
     end
   end
@@ -29,7 +33,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
           'customer_id_choices',
           '#{ url_for(:controller => 'customers', :action => 'autocomplete', :project_id => context[:project].id) }',
           {
-            minChars: 3,
+            minChars: 1,
             frequency: 0.5,
             paramName: 'q',
             afterUpdateElement: function(text, li) {
