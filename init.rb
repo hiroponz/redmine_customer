@@ -5,14 +5,18 @@ require 'redmine'
 require 'dispatcher'
 require 'issue_patch'
 require 'project_patch'
+require 'custom_fields_helper_patch'
+
 Dispatcher.to_prepare do
   Issue.send(:include, IssuePatch)
   Project.send(:include, ProjectPatch)
   Query.send(:include, QueryPatch)
+  #CustomFieldsHelper.send(:include, CustomerCustomFieldsHelperPatch)
 end
 
 # Hooks
 require_dependency 'customer_issue_hook'
+require_dependency 'custom_fields_helper'
 
 RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
 

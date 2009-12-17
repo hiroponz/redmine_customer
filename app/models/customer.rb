@@ -5,6 +5,8 @@ class Customer < ActiveRecord::Base
   belongs_to :neighborhood
   belongs_to :address_type
 
+  default_scope :order => 'name'
+
   acts_as_customizable
   
   validates_presence_of :name
@@ -16,10 +18,17 @@ class Customer < ActiveRecord::Base
   
   def self.search(query)
     find :all, :conditions => [
-      "name like :query or cpf like :query or email like :query or rg like :query",
+      search_query,
       {:query => "%#{query}%"}
     ]
+  end
 
+  def self.search_query
+    search_fields.join(' like :query or ') + ' like :query'
+  end
+
+  def self.search_fields
+    columns.collect &:name
   end
 
   def neighborhood_other

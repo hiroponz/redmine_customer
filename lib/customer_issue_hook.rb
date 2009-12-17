@@ -25,16 +25,18 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   #
   def view_issues_form_details_bottom(context = { })
     if context[:project].module_enabled?('customer-plugin')
-      select = context[:form].text_field :customer_id, :style => 'display: none'
+      customers = context[:project].customers
+      select = context[:form].select :customer_id, customers.collect{|c| [c.to_s, c.id]}
+
       text_field = text_field_tag :customer_text, context[:form].object.customer.to_s
       link = link_to('Cadastrar', {:controller => 'customers', :action => 'new', :project_id => context[:project].id}, :target => '_blank')
       autocomplete = javascript_tag <<-JS
         new Ajax.Autocompleter(
           'customer_text',
           'customer_id_choices',
-          '#{ url_for(:controller => 'customers', :action => 'autocomplete', :project_id => context[:project].id) }',
+          '#{url_for(:controller => 'customers', :action => 'autocomplete', :project_id => context[:project].id)}',
           {
-            minChars: 1,
+            minChars: 0,
             frequency: 0.5,
             paramName: 'q',
             afterUpdateElement: function(text, li) {
@@ -43,7 +45,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
           });
       JS
       return "
-        <p>#{select}#{text_field} - #{link}</p>
+        <p>#{select} - #{text_field} - #{link}</p>
         <div id=\"customer_id_choices\" class=\"autocomplete\"></div>
         #{autocomplete}
       "

@@ -5,7 +5,11 @@ class CustomersController < ApplicationController
   before_filter :find_customer, :only => [:show, :edit, :update, :destroy]
  
   def index
-    @customers = @project.customers
+    if params[:q]
+      @customers = @project.customers.search params[:q]
+    else
+      @customers = @project.customers
+    end
   end
 
   def autocomplete
@@ -52,7 +56,7 @@ class CustomersController < ApplicationController
       render :action => "new"
     end
   end
-  
+
   private
 
   def find_project
