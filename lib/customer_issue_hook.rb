@@ -44,6 +44,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
             }
           });
       JS
+
       return "
         <p>#{select} - #{text_field} - #{link}</p>
         <div id=\"customer_id_choices\" class=\"autocomplete\"></div>
