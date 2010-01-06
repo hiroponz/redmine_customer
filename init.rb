@@ -3,20 +3,20 @@ require 'redmine'
 
 # Patches to the Redmine core.
 require 'dispatcher'
-require 'issue_patch'
-require 'project_patch'
-require 'custom_fields_helper_patch'
+
+# Dependências
+require_dependency 'issue'
+require_dependency 'project'
+require_dependency 'customer_issue_hook'
+require_dependency 'query'
+
+require 'customer'
 
 Dispatcher.to_prepare do
-  Issue.send(:include, IssuePatch)
-  Project.send(:include, ProjectPatch)
-  Query.send(:include, QueryPatch)
-  #CustomFieldsHelper.send(:include, CustomerCustomFieldsHelperPatch)
+  Issue.send(:include, CustomerPlugin::Patches::Issue)
+  Project.send(:include, CustomerPlugin::Patches::Project)
+  Query.send(:include, CustomerPlugin::Patches::Query)
 end
-
-# Hooks
-require_dependency 'customer_issue_hook'
-require_dependency 'custom_fields_helper'
 
 RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
 
