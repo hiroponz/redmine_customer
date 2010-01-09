@@ -4,11 +4,16 @@ namespace :customer do
   desc 'Carrega formas de contato padrões'
   task :load_default_data => :environment do
     ['E-mail', 'Celular', 'Telefone Residencial', 'Correspondência'].each do |name|
-      ContactForm.create(:name => name)
+      ContactForm.find_or_create_by_name(name)
     end
     ['Rua', 'Av.'].each do |name|
-      AddressType.create(:name => name)
+      AddressType.find_or_create_by_name(name)
     end
+  end
+
+  desc 'bug fix - Deleta correspondência duplicada'
+  task :fix_correspondencia => :environment do
+    ContactForm.find_all_by_name('Correspondência').destroy
   end
 
   desc 'Cadastra bairros'
