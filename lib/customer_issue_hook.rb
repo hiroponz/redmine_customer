@@ -26,7 +26,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   def view_issues_form_details_bottom(context = { })
     if context[:project].module_enabled?('customer-plugin')
       customers = context[:project].customers
-      select = context[:form].select :customer_id, customers.collect{|c| [c.to_s, c.id]}
+      select = context[:form].select :customer_id, customers.collect{|c| [c.to_s, c.id]}, :include_blank => true
 
       text_field = text_field_tag :customer_text, context[:form].object.customer.to_s
       link = link_to('Cadastrar', {:controller => 'customers', :action => 'new', :project_id => context[:project].id}, :target => '_blank')
@@ -44,12 +44,14 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
             }
           });
       JS
-
-      return "
-        <p>#{select} - #{text_field} - #{link}</p>
-        <div id=\"customer_id_choices\" class=\"autocomplete\"></div>
+      customer_form = <<-HTML
+        <span id=\"customer\">
+          <p>#{select} - #{text_field} - #{link}</p>
+          <div id=\"customer_id_choices\" class=\"autocomplete\"></div>
+        </span>
         #{autocomplete}
-      "
+      HTML
+      javascript_tag "$('issue_descr_fields').insert({top: '#{escape_javascript(customer_form)}'});"
     end
   end
   
