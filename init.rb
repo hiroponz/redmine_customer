@@ -16,6 +16,7 @@ Dispatcher.to_prepare do
   Issue.send(:include, CustomerPlugin::Patches::Issue)
   Project.send(:include, CustomerPlugin::Patches::Project)
   Query.send(:include, CustomerPlugin::Patches::Query)
+  ApplicationController.send(:include, CustomerPlugin::Patches::ApplicationController)
 end
 
 RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'

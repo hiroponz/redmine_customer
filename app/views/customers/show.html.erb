@@ -27,13 +27,18 @@
           <% end %>
         </p>
       </p>
+      <p>
+        <%= link_to 'Editar', {:controller => 'customers', :action => 'edit', :project_id => params[:project_id], :id => @customer} %>
+      </p>
     </div>
   </div>
+
+  <%= render :partial => 'audits', :locals => {:audits => @customer.audits.all(:order => 'id desc')} %>
+
   <%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" %>
   <% javascript_tag do %>
     jQuery.noConflict();
     jQuery(document).ready(function(){
-      //jQuery('.details').hide();
       jQuery('.header').click(function(){
         jQuery('.details').slideToggle();
       });
@@ -41,11 +46,4 @@
   <% end %>
 <% else %>
   <p class="nodata"><%=l(:label_no_data)%></p>
-<% end %>
-
-
-<% content_for(:header_tags) do %>
-  <style type="text/css">
-    .icon-users { background-image: url(../../images/users.png); }
-  </style>
 <% end %>

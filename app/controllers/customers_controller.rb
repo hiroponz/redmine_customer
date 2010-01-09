@@ -2,7 +2,8 @@ class CustomersController < ApplicationController
   unloadable
   layout 'base'
   before_filter :find_project
-  before_filter :find_customer, :only => [:show, :edit, :update, :destroy]
+  before_filter :find_customer, :except => [:index, :new, :create]
+  helper :issues
  
   def index
     if params[:q]

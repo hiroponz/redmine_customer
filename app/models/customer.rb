@@ -5,6 +5,8 @@ class Customer < ActiveRecord::Base
   belongs_to :neighborhood
   belongs_to :address_type
 
+  acts_as_audited
+
   default_scope :order => 'name'
 
   acts_as_customizable
