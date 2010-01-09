@@ -1,0 +1,15 @@
+<div id="history">
+  <h3><%=l(:label_history)%></h3>
+  <% audits.each do |audit| %>
+    <div class="journal">
+      <%= authoring audit.created_at, audit.user, :label => :label_updated_time_by %></h4>
+      <%= avatar(audit.user, :size => "32") %>
+      <ul>
+        <% audit.changes.each do |attr, values| %>
+          <% detail = change_to_detail(attr, values) %>
+          <li><%= show_detail detail %></li>
+        <% end %>
+      </ul>
+    </div>  
+  <% end %>
+</div>
