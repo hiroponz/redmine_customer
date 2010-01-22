@@ -13,12 +13,7 @@
     <%= f.text_field 'name', :required => true -%>
 
     <%= label_tag 'customer_gender', l(:field_gender), :class => 'left' -%>
-    <%= f.select 'gender', 
-      [
-        [ l(:field_gender_male), :male],
-        [ l(:field_gender_female), :female]
-      ],
-      :no_label => true -%>
+    <%= f.select 'gender', [l(:field_gender_male), l(:field_gender_female)], :no_label => true -%>
   </p>
   <p>
     <%= f.date_select 'birthday', :label => :field_birthday, :start_year => 1920, :end_year => Time.now.year, :include_blank => true -%>
