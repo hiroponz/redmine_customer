@@ -6,13 +6,13 @@ class Customer < ActiveRecord::Base
   belongs_to :address_type
 
   acts_as_audited
+  acts_as_customizable
 
   default_scope :order => 'name'
 
-  acts_as_customizable
+  usar_como_cpf :cpf
   
   validates_presence_of :name
-
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i, 
     :allow_nil => true, :allow_blank => true
 

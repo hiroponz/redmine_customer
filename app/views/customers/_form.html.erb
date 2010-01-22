@@ -1,5 +1,9 @@
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag 'form', :plugin => 'customer-plugin' %> 
+  <%= javascript_include_tag "jquery.min.js", :plugin => "customer-plugin" %>
+  <%= javascript_include_tag "jquery.validate.js", :plugin => "customer-plugin" %>
+  <%= javascript_include_tag "jquery.maskedinput.js", :plugin => "customer-plugin" %>
+  <%= javascript_include_tag "customer-plugin", :plugin => "customer-plugin" %>
 <% end %>
 
 <%= error_messages_for 'customer' %>
@@ -74,9 +78,4 @@
     </p>
   <% end %>
 </div>
-
-<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" %>
-<%= javascript_include_tag "jquery.validate.js", :plugin => "customer-plugin" %>
-<%= javascript_include_tag "jquery.maskedinput.js", :plugin => "customer-plugin" %>
-<%= javascript_include_tag "customer-plugin", :plugin => "customer-plugin" %>
 

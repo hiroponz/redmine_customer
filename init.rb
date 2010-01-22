@@ -10,6 +10,7 @@ require_dependency 'project'
 require_dependency 'customer_issue_hook'
 require_dependency 'query'
 
+require 'brcpfcnpj'
 require 'customer'
 
 Dispatcher.to_prepare do
