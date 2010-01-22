@@ -17,6 +17,7 @@ class Customer < ActiveRecord::Base
     :allow_nil => true, :allow_blank => true
 
   before_save :remove_address_type, :if => 'address.blank?'
+  before_save :update_contact_forms_cache
   
   def self.search(query)
     find :all, :conditions => [
@@ -71,5 +72,9 @@ class Customer < ActiveRecord::Base
 
   def remove_address_type
     self.address_type = nil
+  end
+
+  def update_contact_forms_cache
+    self.contact_forms_cache = contact_forms.to_sentence
   end
 end

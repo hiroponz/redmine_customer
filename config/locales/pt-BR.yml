@@ -1,5 +1,11 @@
 pt-BR:
 
+  support:
+    array:
+      words_connector: ", "
+      two_words_connector: " e "
+      last_word_connector: " e "
+
   date:
     order: [:day, :month, :year]
 
@@ -33,5 +39,6 @@ pt-BR:
   field_gender_male: Masculino
   field_gender_female: Feminino
   field_contact_form: Formas de contato
+  field_contact_forms_cache: Formas de Contato
   notice_successful_save: Salvo com sucesso
   notice_unsuccessful_save: Não foi possível salvar
