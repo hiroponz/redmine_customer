@@ -72,6 +72,27 @@ class Customer < ActiveRecord::Base
 
   private
 
+  def audit_create
+    write_audit(:action => 'create', :changes => audited_attributes.merge(custom_values_changes))
+  end
+
+  def audit_update
+    changes = audited_changes.merge(custom_values_changes)
+    unless changes.empty?
+      write_audit(:action => 'update', :changes => changes)
+    end
+  end
+
+  def custom_values_changes
+    returning({}) do |changes|
+      custom_values.each do |custom_value|
+        if custom_value.changed?
+          changes["cf-#{custom_value.custom_field.id}"] = custom_value.changes['value']
+        end
+      end
+    end
+  end
+
   def remove_address_type
     self.address_type = nil
   end

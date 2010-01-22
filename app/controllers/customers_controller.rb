@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
   layout 'base'
   before_filter :find_project
   before_filter :find_customer, :except => [:index, :new, :create]
-  helper :issues
+  helper :issues, :custom_fields
  
   def index
     if params[:q]

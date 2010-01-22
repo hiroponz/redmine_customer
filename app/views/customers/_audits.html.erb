@@ -9,7 +9,7 @@
         <%= avatar(audit.user, :size => "32") %>
         <ul>
           <% audit.changes.each do |attr, values| %>
-            <% detail = change_to_detail(attr, values) %>
+            <% detail = change_to_detail(audit.auditable, attr, values) %>
             <li><%= show_detail detail %></li>
           <% end %>
         </ul>
