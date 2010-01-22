@@ -1,4 +1,6 @@
 class Customer < ActiveRecord::Base
+  unloadable
+
   has_many :issues
   has_and_belongs_to_many :contact_forms
   belongs_to :project

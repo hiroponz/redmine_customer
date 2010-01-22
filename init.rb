@@ -9,15 +9,17 @@ require_dependency 'issue'
 require_dependency 'project'
 require_dependency 'customer_issue_hook'
 require_dependency 'query'
+require_dependency 'custom_fields_helper'
 
 require 'brcpfcnpj'
-require 'customer'
+require 'customer_plugin'
 
 Dispatcher.to_prepare do
   Issue.send(:include, CustomerPlugin::Patches::Issue)
   Project.send(:include, CustomerPlugin::Patches::Project)
   Query.send(:include, CustomerPlugin::Patches::Query)
   ApplicationController.send(:include, CustomerPlugin::Patches::ApplicationController)
+  CustomFieldsHelper.send(:include, CustomerPlugin::Patches::CustomFieldsHelper)
 end
 
 RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'

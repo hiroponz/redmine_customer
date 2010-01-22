@@ -72,5 +72,7 @@
       <%= label_tag :contact_form, contact_form, :for => "customer_contact_form_ids_#{contact_form.id}", :class => 'left' %>
     </p>
   <% end %>
+
+  <%= render :partial => 'form_custom_fields', :locals => {:customer => @customer} %>
 </div>
 

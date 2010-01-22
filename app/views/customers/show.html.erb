@@ -18,15 +18,18 @@
       <p><%= l(:field_cpf) %>: <%= h @customer.cpf %></p>
       <p><%= l(:field_rg) %>: <%= h @customer.rg %></p>
       <p><%= l(:field_rg_expeditor) %>: <%= h @customer.rg_expeditor %></p>
-      <p><%= l(:field_gender) %>: <%= h @customer.gender %>></p>
+      <p><%= l(:field_gender) %>: <%= h @customer.gender %></p>
       <p>
         <%= l(:field_contact_form) %>
         <ul>
           <% @customer.contact_forms.each do |contact_form| %>
             <li><%= contact_form %></li>
           <% end %>
-        </p>
+        </ul>
       </p>
+      <% @customer.custom_values.each do |custom_value| %>
+        <p><%= custom_value.custom_field.name %>: <%= h custom_value.value %></p>
+      <% end %>
       <p>
         <%= link_to 'Editar', {:controller => 'customers', :action => 'edit', :project_id => params[:project_id], :id => @customer} %>
       </p>
