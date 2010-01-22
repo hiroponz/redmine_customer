@@ -32,7 +32,7 @@ Redmine::Plugin.register 'customer-plugin' do
   author_url 'http://www.littlestreamsoftware.com' if respond_to? :author_url
 
   project_module 'customer-plugin' do
-    permission :manage_customers, :customers => [:new, :create, :edit, :update, :destroy], :public => true
+    permission :manage_customers, :customers => [:new, :create, :edit, :update, :destroy]
     permission :view_customers, :customers => [:index, :show], :public => true
   end
 
