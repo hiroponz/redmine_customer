@@ -30,7 +30,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
 
       text_field = text_field_tag :customer_text, context[:form].object.customer.to_s
       link = link_to('Cadastrar', {:controller => 'customers', :action => 'new', :project_id => context[:project].id}, :target => '_blank')
-      autocomplete = javascript_tag <<-JS
+      js = javascript_tag <<-JS
         new Ajax.Autocompleter(
           'customer_text',
           'customer_id_choices',
@@ -43,13 +43,17 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
               $("issue_customer_id").value = li.id;
             }
           });
+        query_params = window.location.href.toQueryParams();
+        if(query_params['customer_id']) {
+          $("issue_customer_id").value = query_params['customer_id'];
+        }
       JS
       customer_form = <<-HTML
         <span id=\"customer\">
           <p>#{select} - #{text_field} - #{link}</p>
           <div id=\"customer_id_choices\" class=\"autocomplete\"></div>
         </span>
-        #{autocomplete}
+        #{js}
       HTML
       javascript_tag "$('issue_descr_fields').insert({top: '#{escape_javascript(customer_form)}'});"
     end

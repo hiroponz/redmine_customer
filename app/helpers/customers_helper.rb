@@ -26,4 +26,14 @@ module CustomersHelper
     },
     :class => 'icon icon-folder'
   end
+
+  def link_to_new_task(customer)
+    link_to 'Nova Tarefa', {
+      :controller => 'issues',
+      :action => 'new',
+      :project_id => params[:project_id],
+      :customer_id => customer.id
+    },
+    :class => 'icon icon-folder'
+  end
 end
