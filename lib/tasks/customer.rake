@@ -11,11 +11,6 @@ namespace :customer do
     end
   end
 
-  desc 'bug fix - Deleta correspondência duplicada'
-  task :fix_correspondencia => :environment do
-    ContactForm.find_all_by_name('Correspondência').destroy
-  end
-
   desc 'Cadastra bairros'
   task :cadastra_bairros => :environment do
     ENV['bairros'].split(',').each do |name|
