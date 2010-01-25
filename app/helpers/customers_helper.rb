@@ -32,7 +32,7 @@ module CustomersHelper
   end
 
   def link_to_tasks(customer)
-    link_to 'Tarefas', {
+    link_to 'Registros', {
       :controller => 'issues',
       :action => 'index',
       :project_id => params[:project_id],
@@ -45,12 +45,12 @@ module CustomersHelper
   end
 
   def link_to_new_task(customer)
-    link_to 'Nova Tarefa', {
+    link_to 'Novo Registro', {
       :controller => 'issues',
       :action => 'new',
       :project_id => params[:project_id],
       :customer_id => customer.id
     },
-    :class => 'icon icon-folder'
+    :class => 'icon icon-add'
   end
 end

@@ -15,8 +15,8 @@ pt-BR:
   label_customer_information: Detalhes do Cliente
   label_customer_edit_information: Editar Cliente
   label_customer_view: Ver
-  label_customer_list: Listar
-  label_customer_new: Novo
+  label_customer_list: Listar Todos
+  label_customer_new: Novo Cliente
   field_customer: Cliente
   field_birthday: Data de Nascimento
   field_cpf: CPF
