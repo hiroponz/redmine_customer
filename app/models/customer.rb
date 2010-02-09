@@ -10,7 +10,13 @@ class Customer < ActiveRecord::Base
   default_scope :order => 'name'
 
   def self.search(query)
-    all :conditions => ['name like ?', "%#{query}%"]
+    all(
+      :conditions => [
+        'customers.name like :query or custom_values.value like :query',
+        {:query => "%#{query}%"}
+      ],
+      :include => :custom_values
+    )
   end
 
   def to_s
