@@ -4,7 +4,7 @@
 
 <% unless @customer.nil? -%>
   <div class="box">
-    <p><%= link_to "#{@customer} - Detalhes", '#', :class => 'header' %> | <%= link_to_tasks @customer %> | <%= link_to_new_task @customer %></p>
+    <p><%= link_to @customer, '#', :class => 'header' %> | <%= link_to_tasks @customer %> | <%= link_to_new_task @customer %></p>
     <div class="details">
       <p><%= l(:field_name) %>: <%= h @customer.name %></p>
       <p><%= l(:field_email) %>: <%= h @customer.email %></p>
@@ -12,7 +12,7 @@
         <p><%= custom_value.custom_field.name %>: <%= h custom_value.value %></p>
       <% end %>
       <p>
-        <%= link_to 'Editar', {:controller => 'customers', :action => 'edit', :project_id => params[:project_id], :id => @customer} %>
+        <%= link_to l(:button_edit), {:controller => 'customers', :action => 'edit', :project_id => params[:project_id], :id => @customer} %>
       </p>
     </div>
   </div>

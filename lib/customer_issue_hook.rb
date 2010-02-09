@@ -29,7 +29,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
       select = context[:form].select :customer_id, customers.collect{|c| [c.to_s, c.id]}, :include_blank => true
 
       text_field = text_field_tag :customer_text, context[:form].object.customer.to_s
-      link = link_to('Cadastrar', {:controller => 'customers', :action => 'new', :project_id => context[:project].id}, :target => '_blank')
+      link = link_to(l(:label_customer_new), {:controller => 'customers', :action => 'new', :project_id => context[:project].id}, :target => '_blank')
       js = javascript_tag <<-JS
         new Ajax.Autocompleter(
           'customer_text',
