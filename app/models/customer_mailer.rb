@@ -13,8 +13,7 @@ class CustomerMailer < Mailer
   def parse_tags(text, customer)
     tags = {
       :id => customer.id.to_s,
-      :nome => customer.name,
-      :cpf => customer.cpf
+      :nome => customer.name
     }
     tags.each do |key, value|
       text.gsub! /\{\{#{key}\}\}/, value

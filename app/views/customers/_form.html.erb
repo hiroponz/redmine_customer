@@ -11,67 +11,10 @@
 <div class="box"> 
   <p>
     <%= f.text_field 'name', :required => true -%>
-
-    <%= label_tag 'customer_gender', l(:field_gender), :class => 'left' -%>
-    <%= f.select 'gender', [l(:field_gender_male), l(:field_gender_female)], :no_label => true -%>
-  </p>
-  <p>
-    <%= f.date_select 'birthday', :label => :field_birthday, :start_year => 1920, :end_year => Time.now.year, :include_blank => true -%>
-  </p>
-  <p>
-    <%= f.text_field 'cpf' -%>
-  </p>
-  <p>
-    <%= f.text_field 'rg' -%>
-
-    <%= label_tag 'customer_rg_expeditor', l(:field_rg_expeditor), :class => 'left' -%>
-    <%= f.text_field 'rg_expeditor', :no_label => true -%>
-  </p>
-  <p>
-    <%= f.select 'address_type_id', AddressType.all.collect {|a| [a.name, a.id]} -%>
-
-    <%= label_tag 'address', l(:field_address), :class => 'left' -%>
-    <%= f.text_field 'address', :no_label => true -%>
-  </p>
-  <p>
-    <%= f.text_field 'number' -%>
-  </p>
-  <p>
-    <%= f.select 'neighborhood_id', Neighborhood.all.collect {|n| [n.name, n.id]}, :include_blank => true -%>
-
-    <%= label_tag 'customer_neighborhood_other', l(:field_neighborhood_other), :class => 'left' -%>
-    <%= f.text_field 'neighborhood_other', :no_label => true -%>
-  </p>
-  <p>
-    <%= f.text_field 'obs' -%>
-  </p>
-  <p>
-    <%= f.text_field 'residential_phone', :class => 'phone' -%>
-  </p>
-  <p>
-    <%= f.text_field 'mobile_phone', :class => 'phone' -%>
   </p>
   <p>
     <%= f.text_field 'email', :label => :field_email -%>
   </p>
-  <p>
-    <%= f.text_area 'notes', :rows => 5 -%>
-  </p>
-  <p>
-    <label><%= l(:field_contact_form) %></label>
-  </p>
-  <% ContactForm.all.each do |contact_form| %>
-    <p>
-      <%= 
-          check_box_tag('customer[contact_form_ids][]',
-                        contact_form.id,
-                        @customer.contact_forms.include?(contact_form),
-                        :id => "customer_contact_form_ids_#{contact_form.id}"
-                       )
-      -%>
-      <%= label_tag :contact_form, contact_form, :for => "customer_contact_form_ids_#{contact_form.id}", :class => 'left' %>
-    </p>
-  <% end %>
 
   <%= render :partial => 'form_custom_fields', :locals => {:customer => @customer} %>
 </div>

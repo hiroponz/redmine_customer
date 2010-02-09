@@ -1,51 +1,6 @@
 # encoding: UTF-8
 
 namespace :customer do
-  desc 'Carrega formas de contato padrões'
-  task :load_default_data => :environment do
-    ['E-mail', 'Celular', 'Telefone Residencial', 'Correspondência'].each do |name|
-      ContactForm.find_or_create_by_name(name)
-    end
-    ['Rua', 'Av.'].each do |name|
-      AddressType.find_or_create_by_name(name)
-    end
-  end
-
-  desc 'Cadastra bairros'
-  task :cadastra_bairros => :environment do
-    ENV['bairros'].split(',').each do |name|
-      Neighborhood.create :name => name.strip
-    end
-  end
-
-  desc 'Cadastra tipos de logradouro'
-  task :cadastra_tipos_logradouro => :environment do
-    ENV['tipos'].split(',').each do |name|
-      AddressType.create :name => name.strip
-    end
-  end
-
-  desc 'Força retirada de tudo que plugin colocou no banco'
-  task :drop => :environment do
-    queries = [
-      "drop table customers;",
-      "alter table issues drop column customer_id;",
-      "drop table neighborhoods;",
-      "drop table contact_forms;",
-      "drop table contact_forms_customers;",
-      "delete from schema_migrations where version like '%-customer_plugin';",
-      "delete from schema_migrations where version like '%-customer-plugin';"
-    ]
-
-    queries.each do |query|
-      begin
-        ActiveRecord::Base.connection.execute(query)
-      rescue Exception => e
-        puts "#{query} falhou: #{e}"
-      end
-    end
-  end
-
   namespace :email do
     desc <<-END_DESC
 Read emails from an IMAP server, create users but do not notifying them.
