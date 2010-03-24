@@ -38,5 +38,5 @@ Redmine::Plugin.register 'customer-plugin' do
     permission :view_customers, :customers => [:index, :show], :public => true
   end
 
-  menu :project_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => 'Clientes', :param => :project_id, :after => :files
+  menu :project_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => :customer_title, :param => :project_id, :after => :files
 end
