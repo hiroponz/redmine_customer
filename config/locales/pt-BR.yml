@@ -1,5 +1,15 @@
 pt-BR:
 
+  activerecord:
+    errors:
+      models:
+        custom_value:
+          attributes:
+            value:
+              invalid_cpf: não é um CPF válido
+              invalid_cnpj: não é um CNPJ válido
+              invalid_cpj_cnpj: não é um CPF ou CNPJ válido
+
   support:
     array:
       words_connector: ", "
@@ -15,33 +25,11 @@ pt-BR:
   label_customer_information: Detalhes do Cliente
   label_customer_edit_information: Editar Cliente
   label_customer_view: Ver
-  label_customer_list: Listar Todos
-  label_customer_new: Novo Cliente
   label_customer_list: Listar
   label_customer_new: Novo
   field_customer: Cliente
-  field_birthday: Data de Nascimento
-  field_cpf: CPF
-  field_rg: RG
-  field_rg_expeditor: Orgão emissor
-  field_notes: Observações
   field_name: Nome
-  field_neighborhood: Bairro
-  field_neighborhood_other: Outro
-  field_number: Número
-  field_company: Empresa
-  field_address: Logradouro
-  field_address_type: Tipo
-  field_obs: Complemento
-  field_residential_phone: Telefone Residencial
-  field_mobile_phone: Celular
   field_email: Email
-  field_website: Site
-  field_gender: Sexo
-  field_gender_male: Masculino
-  field_gender_female: Feminino
-  field_contact_form: Formas de contato
-  field_contact_forms_cache: Formas de Contato
   notice_successful_save: Salvo com sucesso
   notice_unsuccessful_save: Não foi possível salvar
   project_module_customer-plugin: Clientes

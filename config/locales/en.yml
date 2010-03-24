@@ -1,0 +1,16 @@
+en:
+
+  customer: Customers
+  label_customer: Customer
+  label_customer_plural: Customers
+  label_customer_information: Customer Details
+  label_customer_edit_information: Edit Customer
+  label_customer_view: Show
+  label_customer_list: List
+  label_customer_new: New
+  field_customer: Customer
+  field_name: Name
+  field_email: Email
+  notice_successful_save: Save was Successful
+  notice_unsuccessful_save: Save was not Successful
+  project_module_customer-plugin: Customers

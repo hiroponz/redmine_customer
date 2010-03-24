@@ -7,8 +7,9 @@ require 'dispatcher'
 # Dependências
 require_dependency 'issue'
 require_dependency 'project'
-require_dependency 'customer_issue_hook'
 require_dependency 'query'
+require_dependency 'custom_value'
+require_dependency 'customer_issue_hook'
 require_dependency 'custom_fields_helper'
 
 require 'customer_plugin'
@@ -17,6 +18,7 @@ Dispatcher.to_prepare do
   Issue.send(:include, CustomerPlugin::Patches::Issue)
   Project.send(:include, CustomerPlugin::Patches::Project)
   Query.send(:include, CustomerPlugin::Patches::Query)
+  CustomValue.send(:include, CustomerPlugin::Patches::CustomValue)
   ApplicationController.send(:include, CustomerPlugin::Patches::ApplicationController)
   CustomFieldsHelper.send(:include, CustomerPlugin::Patches::CustomFieldsHelper)
 end
