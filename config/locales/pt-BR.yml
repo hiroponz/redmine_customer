@@ -9,7 +9,7 @@ pt-BR:
   date:
     order: [:day, :month, :year]
 
-  customer_title: Clientes
+  customer: Clientes
   label_customer: Cliente
   label_customer_plural: Clientes
   label_customer_information: Detalhes do Cliente
@@ -44,3 +44,4 @@ pt-BR:
   field_contact_forms_cache: Formas de Contato
   notice_successful_save: Salvo com sucesso
   notice_unsuccessful_save: Não foi possível salvar
+  project_module_customer-plugin: Clientes

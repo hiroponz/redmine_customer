@@ -32,7 +32,7 @@ module CustomersHelper
   end
 
   def link_to_tasks(customer)
-    link_to 'Registros', {
+    link_to l(:label_issue_plural), {
       :controller => 'issues',
       :action => 'index',
       :project_id => params[:project_id],
@@ -45,7 +45,7 @@ module CustomersHelper
   end
 
   def link_to_new_task(customer)
-    link_to 'Novo Registro', {
+    link_to l(:label_issue_new), {
       :controller => 'issues',
       :action => 'new',
       :project_id => params[:project_id],
