@@ -11,7 +11,6 @@ require_dependency 'customer_issue_hook'
 require_dependency 'query'
 require_dependency 'custom_fields_helper'
 
-require 'brcpfcnpj'
 require 'customer_plugin'
 
 Dispatcher.to_prepare do
@@ -38,5 +37,5 @@ Redmine::Plugin.register 'customer-plugin' do
     permission :view_customers, :customers => [:index, :show], :public => true
   end
 
-  menu :project_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => 'Clientes', :param => :project_id, :after => :files
+  menu :project_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => :customer, :param => :project_id, :after => :files
 end

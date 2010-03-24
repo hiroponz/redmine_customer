@@ -1,4 +1,5 @@
 require 'acts_as_audited'
+require 'brcpfcnpj'
 require 'ostruct'
 
 require 'customer_plugin/patches/issue'
