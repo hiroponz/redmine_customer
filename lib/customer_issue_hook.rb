@@ -28,29 +28,36 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
       customers = context[:project].customers
       select = context[:form].select :customer_id, customers.collect{|c| [c.to_s, c.id]}, :include_blank => true
 
-      text_field = text_field_tag :customer_text, context[:form].object.customer.to_s
-      link = link_to(l(:label_customer_new), {:controller => 'customers', :action => 'new', :project_id => context[:project].id}, :target => '_blank')
+      text_field = text_field_tag :customer_text, context[:form].object.customer.to_s, :style => 'display: none'
       js = javascript_tag <<-JS
-        new Ajax.Autocompleter(
-          'customer_text',
-          'customer_id_choices',
-          '#{url_for(:controller => 'customers', :action => 'autocomplete', :project_id => context[:project].id)}',
-          {
-            minChars: 0,
-            frequency: 0.5,
-            paramName: 'q',
-            afterUpdateElement: function(text, li) {
-              $("issue_customer_id").value = li.id;
+        Event.observe(window, 'load', function() {
+          new Ajax.Autocompleter(
+            'customer_text',
+            'customer_id_choices',
+            '#{url_for(:controller => 'customers', :action => 'autocomplete', :project_id => context[:project].id)}',
+            {
+              minChars: 0,
+              frequency: 0.5,
+              paramName: 'q',
+              afterUpdateElement: function(text, li) {
+                $("issue_customer_id").value = li.id;
+              }
             }
+          );
+          query_params = window.location.href.toQueryParams();
+          if(query_params['customer_id']) {
+            $("issue_customer_id").value = query_params['customer_id'];
+          }
+          Event.observe('customer_text_link', 'click', function(event) {
+            $('customer_text').show();
+            $('customer_text').focus();
+            event.stop();
           });
-        query_params = window.location.href.toQueryParams();
-        if(query_params['customer_id']) {
-          $("issue_customer_id").value = query_params['customer_id'];
-        }
+        });
       JS
       customer_form = <<-HTML
         <span id=\"customer\">
-          <p>#{select} - #{text_field} - #{link}</p>
+          <p>Escolher: #{select} - <a id="customer_text_link" href="#customer_text">Buscar</a> #{text_field}</p>
           <div id=\"customer_id_choices\" class=\"autocomplete\"></div>
         </span>
         #{js}

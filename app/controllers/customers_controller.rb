@@ -3,7 +3,7 @@ class CustomersController < ApplicationController
   layout 'base'
 
   before_filter :find_project, :authorize
-  before_filter :find_customer, :except => [:index, :new, :create]
+  before_filter :find_customer, :except => [:index, :new, :create, :autocomplete]
   before_filter :authorize
 
   helper :issues, :custom_fields
