@@ -12,14 +12,14 @@ module CustomerPlugin
         if value.present?
           if custom_field.name =~ /cpf/i and custom_field.name =~ /cnpj/i
             errors.add(:value, :invalid_cpf_cnpj) unless Cpf.new(value).valido? or Cnpj.new(value).valido?
-          end
+          else
+            if custom_field.name =~ /cpf/i and not Cpf.new(value).valido?
+              errors.add(:value, :invalid_cpf)
+            end
 
-          if custom_field.name =~ /cpf/i and not Cpf.new(value).valido?
-            errors.add(:value, :invalid_cpf)
-          end
-
-          if custom_field.name =~ /cnpj/i and not Cnpj.new(value).valido?
-            errors.add(:value, :invalid_cnpj)
+            if custom_field.name =~ /cnpj/i and not Cnpj.new(value).valido?
+              errors.add(:value, :invalid_cnpj)
+            end
           end
         end
       end
