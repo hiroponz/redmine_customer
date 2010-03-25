@@ -1,6 +1,7 @@
 en:
 
   customer: Customers
+  customer_settings_menu_caption: Menu caption
   label_customer: Customer
   label_customer_plural: Customers
   label_customer_information: Customer Details
@@ -13,4 +14,4 @@ en:
   field_email: Email
   notice_successful_save: Save was Successful
   notice_unsuccessful_save: Save was not Successful
-  project_module_customer-plugin: Customers
+  project_module_customer_plugin: Customers

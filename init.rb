@@ -25,7 +25,7 @@ end
 
 RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
 
-Redmine::Plugin.register 'customer-plugin' do
+Redmine::Plugin.register :customer_plugin do
   name 'Customer plugin'
   author 'Eric Davis'
   description 'This is a plugin for Redmine that can be used to track basic customer information'
@@ -34,10 +34,19 @@ Redmine::Plugin.register 'customer-plugin' do
   url 'https://projects.littlestreamsoftware.com/projects/redmine-customers' if respond_to? :url
   author_url 'http://www.littlestreamsoftware.com' if respond_to? :author_url
 
-  project_module 'customer-plugin' do
+  project_module 'customer_plugin' do
     permission :manage_customers, :customers => [:new, :create, :edit, :update, :destroy]
     permission :view_customers, :customers => [:index, :show], :public => true
   end
 
-  menu :project_menu, :customers, {:controller => 'customers', :action => 'index'}, :caption => :customer, :param => :project_id, :after => :files
+  settings :default => {:menu_caption => ''}, :partial => 'customers/settings'
+
+  menu(
+    :project_menu,
+    :customers,
+    {:controller => 'customers', :action => 'index'},
+    :caption => lambda { Setting.plugin_customer_plugin[:menu_caption] || I18n.t(:customer)},
+    :param => :project_id,
+    :after => :files
+  )
 end

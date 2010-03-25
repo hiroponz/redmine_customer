@@ -1,9 +1,5 @@
 <% content_for :header_tags do %>
-  <%= stylesheet_link_tag 'form', :plugin => 'customer-plugin' %> 
-  <%= javascript_include_tag "jquery.min.js", :plugin => "customer-plugin" %>
-  <%= javascript_include_tag "jquery.validate.js", :plugin => "customer-plugin" %>
-  <%= javascript_include_tag "jquery.maskedinput.js", :plugin => "customer-plugin" %>
-  <%= javascript_include_tag "customer-plugin", :plugin => "customer-plugin" %>
+  <%= stylesheet_link_tag 'form', :plugin => 'customer_plugin' %>
 <% end %>
 
 <%= error_messages_for 'customer' %>
