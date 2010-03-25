@@ -20,6 +20,7 @@ pt-BR:
     order: [:day, :month, :year]
 
   customer: Clientes
+  customer_settings_menu_caption: Nome do menu
   label_customer: Cliente
   label_customer_plural: Clientes
   label_customer_information: Detalhes do Cliente
@@ -32,4 +33,4 @@ pt-BR:
   field_email: Email
   notice_successful_save: Salvo com sucesso
   notice_unsuccessful_save: Não foi possível salvar
-  project_module_customer-plugin: Clientes
+  project_module_customer_plugin: Clientes
