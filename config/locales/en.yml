@@ -10,6 +10,7 @@ en:
   label_customer_list: List
   label_customer_new: New
   field_customer: Customer
+  field_customer_id: Customer
   field_name: Name
   field_email: Email
   notice_successful_save: Save was Successful
