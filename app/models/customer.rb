@@ -7,6 +7,8 @@ class Customer < ActiveRecord::Base
   acts_as_audited
   acts_as_customizable
 
+  validates_presence_of :name
+
   default_scope :order => 'name'
 
   def self.search(query)

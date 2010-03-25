@@ -57,7 +57,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
       JS
       customer_form = <<-HTML
         <span id=\"customer\">
-          <p>Escolher: #{select} - <a id="customer_text_link" href="#customer_text">Buscar</a> #{text_field}</p>
+          <p>#{select} - <a id="customer_text_link" href="#customer_text">#{I18n.t(:label_search)}</a> #{text_field}</p>
           <div id=\"customer_id_choices\" class=\"autocomplete\"></div>
         </span>
         #{js}

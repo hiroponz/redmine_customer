@@ -5,6 +5,7 @@ module CustomerPlugin
         base.class_eval do
           unloadable
           belongs_to :customer
+          ::Issue::SAFE_ATTRIBUTES << 'customer_id'
         end
       end
     end
