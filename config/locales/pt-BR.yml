@@ -8,7 +8,7 @@ pt-BR:
             value:
               invalid_cpf: não é um CPF válido
               invalid_cnpj: não é um CNPJ válido
-              invalid_cpj_cnpj: não é um CPF ou CNPJ válido
+              invalid_cpf_cnpj: não é um CPF ou CNPJ válido
 
   support:
     array:
@@ -21,6 +21,7 @@ pt-BR:
 
   customer: Clientes
   customer_settings_menu_caption: Nome do link no menu de projeto
+
   label_customer: Cliente
   label_customer_plural: Clientes
   label_customer_information: Detalhes do Cliente
@@ -29,10 +30,13 @@ pt-BR:
   label_customer_list: Listar
   label_customer_new: Novo
   label_send_email: Enviar email
+
   field_customer: Cliente
   field_customer_id: Cliente
   field_name: Nome
   field_email: Email
+
   notice_successful_save: Salvo com sucesso
   notice_unsuccessful_save: Não foi possível salvar
+
   project_module_customer_plugin: Clientes
