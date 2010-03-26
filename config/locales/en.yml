@@ -1,5 +1,15 @@
 en:
 
+  activerecord:
+    errors:
+      models:
+        custom_value:
+          attributes:
+            value:
+              invalid_cpf: is not a valid CPF
+              invalid_cnpj: is not a valid CNPJ
+              invalid_cpf_cnpj: is not a valid CPF or CNPJ 
+
   customer: Customers
   customer_settings_menu_caption: Link caption in project menu
   label_customer: Customer
@@ -10,10 +20,13 @@ en:
   label_customer_list: List
   label_customer_new: New
   label_send_email: Send email
+
   field_customer: Customer
   field_customer_id: Customer
   field_name: Name
   field_email: Email
+
   notice_successful_save: Save was Successful
   notice_unsuccessful_save: Save was not Successful
+
   project_module_customer_plugin: Customers
