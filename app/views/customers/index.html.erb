@@ -2,7 +2,8 @@
 
 <h2><%= l(:label_customer_plural) %></h2>
 
-<% form_tag :controller => 'customers', :action => 'index' do %>
+<% form_tag customers_url, :method => :get do %>
+  <%= hidden_field_tag :project_id, params[:project_id] %>
   <fieldset>
     <legend>Filtros</legend>
     <p>
@@ -15,11 +16,11 @@
   <table class="list">
     <% @customers.each do |customer| %>
       <tr class="<%= cycle('odd', 'even') %>">
-        <td><%= link_to customer, {:controller => 'customers', :action => 'show', :project_id => params[:project_id], :id => customer } %></td>
+        <td><%= link_to customer, customer %></td>
         <td align="right">
           <small>
-              <%= link_to l(:button_edit), {:controller => 'customers', :action => 'edit', :project_id => params[:project_id], :id => customer}, :class => 'icon icon-edit' %>
-              <%= link_to l(:button_delete), {:controller => 'customers', :action => 'destroy', :project_id => params[:project_id], :id => customer}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
+              <%= link_to l(:button_edit), edit_customer_url(customer, :project_id => params[:project_id]), :class => 'icon icon-edit' %>
+              <%= link_to l(:button_delete), customer_url(customer, :project_id => params[:project_id]), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
               <%= link_to_tasks customer %>
               <%= link_to_new_task customer %>
           </small>

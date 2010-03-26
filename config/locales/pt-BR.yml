@@ -31,6 +31,9 @@ pt-BR:
   label_customer_new: Novo
   label_send_email: Enviar email
 
+  label_customer_email_subject: Assunto
+  label_customer_email_body: Texto
+
   field_customer: Cliente
   field_customer_id: Cliente
   field_name: Nome
@@ -40,3 +43,5 @@ pt-BR:
   notice_unsuccessful_save: Não foi possível salvar
 
   project_module_customer_plugin: Clientes
+  permission_manage_customers: Gerenciar clientes
+  permission_view_customers: Ver clientes

@@ -13,13 +13,13 @@
 
     <% if @customer.email? %>
       <div class="email" style="display: none;">
-        <% form_tag :controller => 'customers', :action => 'mail', :project_id => params[:project_id], :id => @customer do %>
+        <% form_tag mail_customer_url(@customer, :project_id => params[:project_id]) do %>
           <p>
-            <%= label_tag 'subject' %>: <br />
+            <%= label_tag t(:label_customer_email_subject) %>: <br />
             <%= text_field_tag 'subject', nil, :size => 100 %>
           </p>
           <p>
-            <%= label_tag 'body' %>: <br />
+            <%= label_tag t(:label_customer_email_body) %>: <br />
             <%= text_area_tag 'body', nil, :rows => 10, :cols => 100 %>
           </p>
           <p>
@@ -36,7 +36,7 @@
         <p><%= custom_value.custom_field.name %>: <%= h custom_value.value %></p>
       <% end %>
       <p>
-        <%= link_to l(:button_edit), {:controller => 'customers', :action => 'edit', :project_id => params[:project_id], :id => @customer} %>
+        <%= link_to l(:button_edit), edit_customer_url(@customer, :project_id => params[:project_id]) %>
       </p>
     </div>
 

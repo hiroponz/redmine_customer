@@ -21,6 +21,9 @@ en:
   label_customer_new: New
   label_send_email: Send email
 
+  label_customer_email_subject: Subject
+  label_customer_email_body: Body
+
   field_customer: Customer
   field_customer_id: Customer
   field_name: Name

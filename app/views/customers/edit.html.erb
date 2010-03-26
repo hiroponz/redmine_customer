@@ -2,7 +2,7 @@
 
 <h2><%= l(:label_customer_edit_information) %></h2>
 
-<% labelled_tabular_form_for :customer, @customer, :url =>{:action => 'update', :project_id => params[:project_id], :id => @customer} do |f|  %>
+<% labelled_tabular_form_for @customer, @customer, {} do |f|  %>
   <%= render :partial => 'form', :locals => {:f => f}  %>
   <%= submit_tag l(:button_save) -%>
 <% end -%>

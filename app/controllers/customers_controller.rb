@@ -38,7 +38,7 @@ class CustomersController < ApplicationController
   def update
     if @customer.update_attributes(params[:customer])
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :action => "show", :project_id => params[:project_id], :id => params[:id]
+      redirect_to customer_url(@customer, :project_id => params[:project_id])
     else
       render :action => "edit", :project_id => params[:project_id], :id => params[:id]
     end

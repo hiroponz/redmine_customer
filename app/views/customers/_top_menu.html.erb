@@ -1,7 +1,8 @@
 <div class="contextual">
-  <%= link_to l(:label_customer_list), {:controller => 'customers', :action => 'index', :project_id => params[:project_id]}, :class => 'icon icon-users' %>
-  <%= link_to l(:label_customer_new), {:controller => 'customers', :action => 'new', :project_id => params[:project_id]}, :class => 'icon icon-add' %>
-  <% form_tag :controller => 'customers', :project_id => params[:project_id] do %>
+  <%= link_to l(:label_customer_list), customers_url(:project_id => params[:project_id]), :class => 'icon icon-users' %>
+  <%= link_to l(:label_customer_new), new_customer_url(:project_id => params[:project_id]), :class => 'icon icon-add' %>
+  <% form_tag customers_url, :method => :get do %>
+    <%= hidden_field_tag :project_id, params[:project_id] %>
     <%= label_tag :q, l(:label_search) %>
     <%= text_field_tag :q %>
   <% end %>
