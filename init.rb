@@ -45,7 +45,9 @@ Redmine::Plugin.register :customer_plugin do
     :project_menu,
     :customers,
     {:controller => 'customers', :action => 'index'},
-    :caption => lambda { Setting.plugin_customer_plugin[:menu_caption] || I18n.t(:customer)},
+    :caption => lambda {
+      Setting.plugin_customer_plugin[:menu_caption].present? ? Setting.plugin_customer_plugin[:menu_caption] : I18n.t(:customer)
+    },
     :param => :project_id,
     :after => :files
   )

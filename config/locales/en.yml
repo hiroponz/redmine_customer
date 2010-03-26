@@ -1,7 +1,7 @@
 en:
 
   customer: Customers
-  customer_settings_menu_caption: Menu caption
+  customer_settings_menu_caption: Link caption in project menu
   label_customer: Customer
   label_customer_plural: Customers
   label_customer_information: Customer Details

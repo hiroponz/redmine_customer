@@ -20,7 +20,7 @@ pt-BR:
     order: [:day, :month, :year]
 
   customer: Clientes
-  customer_settings_menu_caption: Nome do menu
+  customer_settings_menu_caption: Nome do link no menu de projeto
   label_customer: Cliente
   label_customer_plural: Clientes
   label_customer_information: Detalhes do Cliente
