@@ -4,7 +4,8 @@
   <% javascript_tag do %>
     jQuery.noConflict();
     jQuery(function() {
-      jQuery('.cpf input, .cnpj input').mask('999.999.999-99');
+      jQuery('.cpf input').mask('999.999.999-99');
+      jQuery('.cnpj input').mask('99.999.999/9999-99');
     });
   <% end %>
 <% end %>

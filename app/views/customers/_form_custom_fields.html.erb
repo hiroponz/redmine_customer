@@ -3,6 +3,7 @@
     css = []
     css << 'cpf' if value.custom_field.name =~ /cpf/i
     css << 'cnpj' if value.custom_field.name =~ /cnpj/i
+    css = ['cpfcnpj'] if value.custom_field.name =~ /cpf/i and value.custom_field.name =~ /cnpj/i
   %>
   <p class="<%= css.join(' ') %>">
     <%= custom_field_tag_with_label :customer, value %>
