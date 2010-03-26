@@ -25,6 +25,12 @@ class CustomersController < ApplicationController
     render
   end
 
+  def mail
+    CustomerMailer.deliver_single_message(@customer, params)
+    flash[:notice] = l(:notice_email_sent, @customer.email)
+    redirect_to :action => "show", :project_id => params[:project_id], :id => params[:id]
+  end
+
   def edit
     render
   end

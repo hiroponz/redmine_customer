@@ -9,6 +9,7 @@ en:
   label_customer_view: Show
   label_customer_list: List
   label_customer_new: New
+  label_send_email: Send email
   field_customer: Customer
   field_customer_id: Customer
   field_name: Name

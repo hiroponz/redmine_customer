@@ -2,6 +2,15 @@
 
 <h2><%= l(:label_customer_plural) %></h2>
 
+<% form_tag :controller => 'customers', :action => 'index' do %>
+  <fieldset>
+    <legend>Filtros</legend>
+    <p>
+      <%= label_tag 'filter[name]', 'Nome:' %> <%= text_field_tag 'filter[name]' %>
+    </p>
+  </fieldset>
+<% end %>
+
 <% unless @customers.empty? %>
   <table class="list">
     <% @customers.each do |customer| %>
@@ -25,6 +34,7 @@
 <% content_for(:header_tags) do %>
   <style type="text/css">
     .icon-users { background-image: url(../../images/user.png); }
+    fieldset { margin-bottom: 20px }
   </style>
 <% end %>
 

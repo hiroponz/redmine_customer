@@ -1,10 +1,10 @@
 class CustomerMailer < Mailer
-  def message(customer)
+  def single_message(customer, options)
     recipients customer.email
-    subject Setting.plugin_notification['subject']
+    subject options[:subject]
     content_type "text/html"
 
-    text = parse_tags Setting.plugin_notification['body'], customer
+    text = parse_tags options[:body], customer
     body :text => text
   end
 

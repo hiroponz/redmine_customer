@@ -4,7 +4,31 @@
 
 <% unless @customer.nil? -%>
   <div class="box">
-    <p><%= link_to @customer, '#', :class => 'header' %> | <%= link_to_tasks @customer %> | <%= link_to_new_task @customer %></p>
+    <p>
+      <%= link_to @customer, '#', :class => 'header' %> | <%= link_to_tasks @customer %> | <%= link_to_new_task @customer %>
+      <% if @customer.email.present? %>
+        | <%= link_to t(:label_send_email), '#', :class => 'send_email' %>
+      <% end %>
+    </p>
+
+    <% if @customer.email? %>
+      <div class="email" style="display: none;">
+        <% form_tag :controller => 'customers', :action => 'mail', :project_id => params[:project_id], :id => @customer do %>
+          <p>
+            <%= label_tag 'subject' %>: <br />
+            <%= text_field_tag 'subject', nil, :size => 100 %>
+          </p>
+          <p>
+            <%= label_tag 'body' %>: <br />
+            <%= text_area_tag 'body', nil, :rows => 10, :cols => 100 %>
+          </p>
+          <p>
+            <%= submit_tag t(:button_submit) %>
+          </p>
+        <% end %>
+      </div>
+    <% end %>
+
     <div class="details">
       <p><%= l(:field_name) %>: <%= h @customer.name %></p>
       <p><%= l(:field_email) %>: <%= h @customer.email %></p>
@@ -15,6 +39,7 @@
         <%= link_to l(:button_edit), {:controller => 'customers', :action => 'edit', :project_id => params[:project_id], :id => @customer} %>
       </p>
     </div>
+
   </div>
 
   <%= render :partial => 'audits', :locals => {:audits => @customer.audits.all(:order => 'id desc')} %>
@@ -25,6 +50,10 @@
     jQuery(document).ready(function(){
       jQuery('.header').click(function(){
         jQuery('.details').slideToggle();
+      });
+      jQuery('.send_email').click(function(){
+        jQuery('.email').slideToggle();
+        jQuery('#subject').focus();
       });
     });
   <% end %>

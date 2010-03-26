@@ -36,7 +36,7 @@ Redmine::Plugin.register :customer_plugin do
 
   project_module 'customer_plugin' do
     permission :manage_customers, :customers => [:new, :create, :edit, :update, :destroy]
-    permission :view_customers, :customers => [:index, :show, :autocomplete], :public => true
+    permission :view_customers, :customers => [:index, :show, :autocomplete, :mail], :public => true
   end
 
   settings :default => {:menu_caption => ''}, :partial => 'customers/settings'
