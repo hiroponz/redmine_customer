@@ -1,5 +1,12 @@
 <% content_for :header_tags do %>
   <%= stylesheet_link_tag 'form', :plugin => 'customer_plugin' %>
+  <%= javascript_include_tag "jquery.min.js", "jquery.maskedinput.js", :plugin => 'customer_plugin' %>
+  <% javascript_tag do %>
+    jQuery.noConflict();
+    jQuery(function() {
+      jQuery('.cpf input').mask('999.999.999-99')
+    });
+  <% end %>
 <% end %>
 
 <%= error_messages_for 'customer' %>

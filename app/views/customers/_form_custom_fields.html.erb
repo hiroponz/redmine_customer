@@ -1,3 +1,10 @@
 <% customer.custom_field_values.each do |value| %>
-  <p><%= custom_field_tag_with_label :customer, value %></p>
+  <%
+    css = []
+    css << 'cpf' if value.custom_field.name =~ /cpf/i
+    css << 'cnpj' if value.custom_field.name =~ /cnpj/i
+  %>
+  <p class="<%= css.join(' ') %>">
+    <%= custom_field_tag_with_label :customer, value %>
+  </p>
 <% end -%>
