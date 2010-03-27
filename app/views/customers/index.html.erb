@@ -2,21 +2,13 @@
 
 <h2><%= l(:label_customer_plural) %></h2>
 
-<% form_tag customers_url, :method => :get do %>
-  <%= hidden_field_tag :project_id, params[:project_id] %>
-  <fieldset>
-    <legend>Filtros</legend>
-    <p>
-      <%= label_tag 'filter[name]', 'Nome:' %> <%= text_field_tag 'filter[name]' %>
-    </p>
-  </fieldset>
-<% end %>
+<%= render 'filters' %>
 
 <% unless @customers.empty? %>
   <table class="list">
     <% @customers.each do |customer| %>
       <tr class="<%= cycle('odd', 'even') %>">
-        <td><%= link_to customer, customer %></td>
+        <td><%= link_to customer, customer_url(customer, :project_id => params[:project_id]) %></td>
         <td align="right">
           <small>
               <%= link_to l(:button_edit), edit_customer_url(customer, :project_id => params[:project_id]), :class => 'icon icon-edit' %>

@@ -33,6 +33,7 @@ pt-BR:
 
   label_customer_email_subject: Assunto
   label_customer_email_body: Texto
+  label_customer_filter: Filtrar
 
   field_customer: Cliente
   field_customer_id: Cliente

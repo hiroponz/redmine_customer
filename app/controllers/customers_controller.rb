@@ -9,10 +9,11 @@ class CustomersController < ApplicationController
   helper :issues, :custom_fields
  
   def index
+    params[:filter] ||= {}
     if params[:q]
       @customers = @project.customers.search params[:q]
     else
-      @customers = @project.customers
+      @customers = @project.customers.all(:conditions => conditions, :include => :custom_values)
     end
   end
 
@@ -28,7 +29,7 @@ class CustomersController < ApplicationController
   def mail
     CustomerMailer.deliver_single_message(@customer, params)
     flash[:notice] = l(:notice_email_sent, @customer.email)
-    redirect_to :action => "show", :project_id => params[:project_id], :id => params[:id]
+    redirect_to customer_url(@customer, :project_id => params[:project_id])
   end
 
   def edit
@@ -50,7 +51,7 @@ class CustomersController < ApplicationController
     else
       flash[:error] = l(:notice_unsuccessful_save)
     end
-    redirect_to :action => "index", :project_id => params[:project_id]
+    redirect_to customers_url(:project_id => params[:project_id])
   end
   
   def new
@@ -61,13 +62,24 @@ class CustomersController < ApplicationController
     @customer = @project.customers.build(params[:customer])
     if @customer.save
       flash[:notice] = l(:notice_successful_create)
-      redirect_to :action => "show", :project_id => params[:project_id], :id => @customer.id
+      redirect_to customer_url(@customer, :project_id => params[:project_id])
     else
       render :action => "new"
     end
   end
 
   private
+
+  def conditions
+    builder = ARCondition.new()
+    filter = params[:filter].dup
+    builder.add ["#{Customer.table_name}.name like ?", "%#{filter.delete(:name)}%"] 
+    builder.add ["#{Customer.table_name}.email like ?", "%#{filter.delete(:email)}%"] 
+    filter.each do |name, value|
+      builder.add ["#{CustomValue.table_name}.custom_field_id = ? and #{CustomValue.table_name}.value like ?", name, "%#{value}%"] if value.present?
+    end
+    builder.conditions
+  end
 
   def find_project
     @project = Project.find(params[:project_id])
