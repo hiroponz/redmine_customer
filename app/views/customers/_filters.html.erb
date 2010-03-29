@@ -13,7 +13,11 @@
     <% Customer.new.custom_field_values.map(&:custom_field).each do |custom| %>
       <p>
         <%= label_tag "filter[#{custom.id}]", custom.name %>
-        <%= text_field_tag "filter[#{custom.id}]", params[:filter][custom.id.to_s] %>
+        <% if custom.possible_values.present? %>
+          <%= select_tag "filter[#{custom.id}]", options_for_select([''] + custom.possible_values, params[:filter][custom.id.to_s])%>
+        <% else %>
+          <%= text_field_tag "filter[#{custom.id}]", params[:filter][custom.id.to_s] %>
+        <% end %>
       </p>
     <% end %>
     <p>
