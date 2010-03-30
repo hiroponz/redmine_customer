@@ -1,16 +1,8 @@
 <% form_tag customers_url, :method => :get do %>
   <%= hidden_field_tag :project_id, params[:project_id] %>
-  <fieldset>
-    <legend>Filtros</legend>
-    <p>
-      <%= label_tag 'filter[name]', t(:field_name) %>
-      <%= text_field_tag 'filter[name]', params[:filter][:name] %>
-    </p>
-    <p>
-      <%= label_tag 'filter[email]', t(:field_email) %>
-      <%= text_field_tag 'filter[email]', params[:filter][:email] %>
-    </p>
-    <% Customer.new.custom_field_values.map(&:custom_field).each do |custom| %>
+  <fieldset class="collapsible collapsed">
+    <legend onclick="toggleFieldset(this);">Filtros</legend>
+    <div style="display: none">
       <p>
         <%= label_tag "filter[#{custom.id}]", custom.name %>
         <% if custom.possible_values.present? %>
@@ -19,9 +11,19 @@
           <%= text_field_tag "filter[#{custom.id}]", params[:filter][custom.id.to_s] %>
         <% end %>
       </p>
-    <% end %>
-    <p>
-      <%= submit_tag t(:label_customer_filter) %>
-    </p>
+      <p>
+        <%= label_tag 'filter[email]', t(:field_email) %>
+        <%= text_field_tag 'filter[email]', params[:filter][:email] %>
+      </p>
+      <% Customer.new.custom_field_values.map(&:custom_field).each do |custom| %>
+        <p>
+          <%= label_tag "filter[#{custom.id}]", custom.name %>
+          <%= text_field_tag "filter[#{custom.id}]", params[:filter][custom.id.to_s] %>
+        </p>
+      <% end %>
+      <p>
+        <%= submit_tag t(:label_customer_filter) %>
+      </p>
+    </div>
   </fieldset>
 <% end %>
