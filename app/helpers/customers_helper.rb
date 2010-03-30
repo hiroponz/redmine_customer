@@ -53,4 +53,36 @@ module CustomersHelper
     },
     :class => 'icon icon-add'
   end
+
+  def filter_by_custom(field)
+    filter_by field.id.to_s, field.name, field.possible_values
+  end
+
+  def filter_by(field, label, values = nil)
+    content_tag :p do
+      label_tag("filter[#{field}][value]", label) +
+      operation_tag(field, label) +
+      value_tag(field, label, values)
+    end
+  end
+
+  OPERATORS = {
+    '='  => :label_equals,
+    '!=' => :label_not_equals,
+    "~"  => :label_contains,
+    "!~" => :label_not_contains
+  }
+
+  def operation_tag(field, label)
+    @operators ||= OPERATORS.inject({}){|operators, op| operators.merge(t(op.last) => op.first)}
+    select_tag("filter[#{field}][operator]", options_for_select(@operators, params[:filter][field][:operator]))
+  end
+
+  def value_tag(field, label, values)
+    if values.present?
+      select_tag "filter[#{field}][value]", options_for_select([''] + values, params[:filter][field][:value])
+    else
+      text_field_tag "filter[#{field}][value]", params[:filter][field][:value]
+    end
+  end
 end

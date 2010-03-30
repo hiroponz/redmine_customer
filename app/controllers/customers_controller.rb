@@ -71,14 +71,22 @@ class CustomersController < ApplicationController
   private
 
   def conditions
-    builder = ARCondition.new()
+    builder = ARCondition.new
     filter = params[:filter].dup
-    builder.add ["#{Customer.table_name}.name like ?", "%#{filter.delete(:name)}%"] 
-    builder.add ["#{Customer.table_name}.email like ?", "%#{filter.delete(:email)}%"] 
-    filter.each do |name, value|
-      builder.add ["#{CustomValue.table_name}.custom_field_id = ? and #{CustomValue.table_name}.value like ?", name, "%#{value}%"] if value.present?
+    builder.add ["#{Customer.table_name}.name like ?", "%#{filter.delete(:name)[:value]}%"] 
+    builder.add ["#{Customer.table_name}.email like ?", "%#{filter.delete(:email)[:value]}%"] 
+    filter.each do |name, options|
+      builder.add condition(name, options)
     end
     builder.conditions
+  end
+
+  def condition(name, options)
+    if options[:value].present?
+      builder.add ["#{CustomValue.table_name}.custom_field_id = ? and #{CustomValue.table_name}.value like ?", name, "%#{options[:value]}%"]
+    else
+      []
+    end
   end
 
   def find_project
