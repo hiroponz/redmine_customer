@@ -34,3 +34,5 @@ en:
   notice_unsuccessful_save: Save was not Successful
 
   project_module_customer_plugin: Customers
+  permission_manage_customers: Manage Customers
+  permission_view_customers: View Customers
