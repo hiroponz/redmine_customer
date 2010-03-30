@@ -37,7 +37,7 @@ class Customer < ActiveRecord::Base
   end
 
   def self.list_for_select
-    all.collect {|c| [c.to_s, c.id.to_s]}
+    all.collect {|customer| [customer.to_s, customer.id.to_s]}
   end
 
   private
