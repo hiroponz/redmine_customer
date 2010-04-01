@@ -73,21 +73,44 @@ class CustomersController < ApplicationController
   def conditions
     builder = ARCondition.new
     filter = params[:filter].dup
-    builder.add ["#{Customer.table_name}.name like ?", "%#{filter.delete(:name)[:value]}%"] 
-    builder.add ["#{Customer.table_name}.email like ?", "%#{filter.delete(:email)[:value]}%"] 
-    filter.each do |name, options|
-      builder.add condition(name, options)
+    if name = filter.delete(:name)
+      cond, value = apply(name[:operator], name[:value])                             
+      builder.add ["#{Customer.table_name}.name #{cond}", value] 
     end
+    if email = filter.delete(:email)
+      cond, value = apply(email[:operator], email[:value])                             
+      builder.add ["#{Customer.table_name}.email #{cond}", value] 
+    end
+    filter.each do |id, options|
+      if options[:value].present?
+        builder.add condition(id, options)
+      end
+    end
+    logger.warn builder.conditions
     builder.conditions
   end
 
-  def condition(name, options)
-    if options[:value].present?
-      builder.add ["#{CustomValue.table_name}.custom_field_id = ? and #{CustomValue.table_name}.value like ?", name, "%#{options[:value]}%"]
-    else
-      []
+  def condition(id, options)
+    base = "#{CustomValue.table_name}.custom_field_id = ? and #{CustomValue.table_name}.value "
+    condition, value = apply(options[:operator], options[:value])
+    ["#{base} #{condition}", id, value]
+  end
+
+  def apply(operator, value)
+    case operator || "~"
+    when "="  then ["= ?", value]
+    when "!="  then ["<> ?", value]
+    when "!~" then ["not like ?", "%#{value}%"]
+    when "~"  then ["like ?", "%#{value}%"]
     end
   end
+
+  OPERATORS = {
+    '='  => :label_equals,
+    '!=' => :label_not_equals,
+    "~"  => :label_contains,
+    "!~" => :label_not_contains
+  }
 
   def find_project
     @project = Project.find(params[:project_id])

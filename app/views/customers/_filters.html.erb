@@ -1,14 +1,16 @@
 <% form_tag customers_url, :method => :get do %>
   <%= hidden_field_tag :project_id, params[:project_id] %>
-  <fieldset>
-    <legend>Filtros</legend>
-    <%= filter_by :name, t(:field_name) %>
-    <%= filter_by :email, t(:field_email) %>
-    <% Customer.new.custom_field_values.map(&:custom_field).each do |field| %>
-      <%= filter_by_custom field %>
-    <% end %>
-    <p>
-      <%= submit_tag t(:label_customer_filter) %>
-    </p>
+  <fieldset class="collapsible collapsed">
+    <legend onclick="toggleFieldset(this);">Filtros</legend>
+    <div style="display: none">
+      <%= filter_by :name, t(:field_name) %>
+      <%= filter_by :email, t(:field_email) %>
+      <% Customer.new.custom_field_values.map(&:custom_field).each do |field| %>
+        <%= filter_by_custom field %>
+      <% end %>
+      <p>
+        <%= submit_tag t(:label_customer_filter) %>
+      </p>
+    </div>
   </fieldset>
 <% end %>

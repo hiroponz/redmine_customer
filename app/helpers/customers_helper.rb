@@ -61,7 +61,7 @@ module CustomersHelper
   def filter_by(field, label, values = nil)
     content_tag :p do
       label_tag("filter[#{field}][value]", label) +
-      operation_tag(field, label) +
+      operator_tag(field, label) +
       value_tag(field, label, values)
     end
   end
@@ -73,16 +73,18 @@ module CustomersHelper
     "!~" => :label_not_contains
   }
 
-  def operation_tag(field, label)
+  def operator_tag(field, label)
     @operators ||= OPERATORS.inject({}){|operators, op| operators.merge(t(op.last) => op.first)}
-    select_tag("filter[#{field}][operator]", options_for_select(@operators, params[:filter][field][:operator]))
+    operator = params.fetch(:filter, {}).fetch(field, {})[:operator]
+    select_tag "filter[#{field}][operator]", options_for_select(@operators, operator)
   end
 
   def value_tag(field, label, values)
+    value = params.fetch(:filter, {}).fetch(field, {})[:value]
     if values.present?
-      select_tag "filter[#{field}][value]", options_for_select([''] + values, params[:filter][field][:value])
+      select_tag "filter[#{field}][value]", options_for_select([''] + values, value)
     else
-      text_field_tag "filter[#{field}][value]", params[:filter][field][:value]
+      text_field_tag "filter[#{field}][value]", value
     end
   end
 end
