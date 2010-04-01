@@ -8,7 +8,7 @@
   <table class="list">
     <% @customers.each do |customer| %>
       <tr class="<%= cycle('odd', 'even') %>">
-        <td><%= link_to customer, customer_url(customer, :project_id => params[:project_id]) %></td>
+        <td><%= link_to "#{customer} - #{customer.email}", customer_url(customer, :project_id => params[:project_id]) %></td>
         <td align="right">
           <small>
               <%= link_to l(:button_edit), edit_customer_url(customer, :project_id => params[:project_id]), :class => 'icon icon-edit' %>
