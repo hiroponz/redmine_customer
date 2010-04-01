@@ -73,21 +73,20 @@ class CustomersController < ApplicationController
   def conditions
     builder = ARCondition.new
     filter = params[:filter].dup
-    if name = filter.delete(:name)
-      cond, value = apply(name[:operator], name[:value])                             
-      builder.add ["#{Customer.table_name}.name #{cond}", value] 
-    end
-    if email = filter.delete(:email)
-      cond, value = apply(email[:operator], email[:value])                             
-      builder.add ["#{Customer.table_name}.email #{cond}", value] 
-    end
+    builder.add attr_condition(filter, :name) if filter[:name]
+    builder.add attr_condition(filter, :email) if filter[:email]
     filter.each do |id, options|
       if options[:value].present?
         builder.add condition(id, options)
       end
     end
-    logger.warn builder.conditions
     builder.conditions
+  end
+
+  def attr_condition(filter, attr)
+    options = filter.delete(attr)
+    cond, value = apply(options[:operator], options[:value])
+    ["#{Customer.table_name}.#{attr} #{cond}", value]
   end
 
   def condition(id, options)
