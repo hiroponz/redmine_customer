@@ -1,0 +1,38 @@
+ja:
+
+  activerecord:
+    errors:
+      models:
+        custom_value:
+          attributes:
+            value:
+              invalid_cpf: is not a valid CPF
+              invalid_cnpj: is not a valid CNPJ
+              invalid_cpf_cnpj: is not a valid CPF or CNPJ 
+
+  customer: 顧客
+  customer_settings_menu_caption: Link caption in project menu
+  label_customer: 顧客
+  label_customer_plural: 顧客
+  label_customer_information: 詳細
+  label_customer_edit_information: 編集
+  label_customer_view: 表示
+  label_customer_list: 一覧
+  label_customer_new: 追加
+  label_send_email: メール送信
+
+  label_customer_email_subject: 件名
+  label_customer_email_body: 本文
+  label_customer_filter: Filter
+
+  field_customer: 顧客
+  field_customer_id: 顧客
+  field_name: 名前
+  field_email: Email
+
+  notice_successful_save: 保存しました
+  notice_unsuccessful_save: 保存に失敗しました
+
+  project_module_customer_plugin: 顧客
+  permission_manage_customers: 顧客の管理
+  permission_view_customers: 顧客の表示
