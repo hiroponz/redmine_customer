@@ -5,7 +5,7 @@ module CustomerPlugin
         base.class_eval do
           unloadable
           belongs_to :customer
-          ::Issue::SAFE_ATTRIBUTES << 'customer_id'
+          ::Issue::SAFE_ATTRIBUTES << 'customer_id' if Issue.const_defined? "SAFE_ATTRIBUTES"
         end
       end
     end
