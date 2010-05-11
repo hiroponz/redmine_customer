@@ -1,7 +1,7 @@
 <% form_tag customers_url, :method => :get do %>
   <%= hidden_field_tag :project_id, params[:project_id] %>
   <fieldset class="collapsible collapsed">
-    <legend onclick="toggleFieldset(this);">Filtros</legend>
+    <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
     <div style="display: none">
       <p>
         <%= label_tag 'filter[email]', t(:field_email) %>
