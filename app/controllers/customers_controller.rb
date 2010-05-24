@@ -59,8 +59,9 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = @project.customers.build(params[:customer])
+    @customer = Customer.new(params[:customer])
     if @customer.save
+      @customer.projects << @project
       flash[:notice] = l(:notice_successful_create)
       redirect_to customer_url(@customer, :project_id => params[:project_id])
     else
