@@ -4,7 +4,7 @@ module RedmineCustomer
       def self.included(base)
         base.extend(ClassMethods)
         base.class_eval do
-          base.add_available_column(QueryColumn.new(:customer_id, :sortable => "#{Customer.table_name}.name"))
+          base.add_available_column(QueryColumn.new(:customer, :sortable => "#{Customer.table_name}.name"))
           alias_method_chain :available_filters, :customer_filters
         end
       end
