@@ -87,6 +87,6 @@ class CustomersController < ApplicationController
   end
 
   def find_customer
-    @customer = @project.customers.find(params[:id])
+    @customer = Customer.find(params[:id])
   end
 end

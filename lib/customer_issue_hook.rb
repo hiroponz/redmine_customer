@@ -7,14 +7,18 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   # * :issue => Issue being rendered
   #
   def view_issues_show_details_bottom(context = { })
-    if context[:project].module_enabled?('customer')
-      data = "<td><b>#{l(:label_customer)}:</b></td>"
-      if customer = context[:issue].customer
-        customer_link = link_to customer.to_s, {:controller => 'customers', :action => 'show', :project_id => customer.project_id, :id => customer }
-        data << "<td>#{customer_link unless customer.nil?}</td>"
-      end
-      "<tr>#{data}<td></td></tr>"
+    project = context[:project]
+    return if project.nil?
+    return unless project.module_enabled?('customer')
+    issue = context[:issue]
+    return if issue.nil?
+
+    data = "<td><b>#{l(:label_customer)}:</b></td>"
+    if customer = issue.customer
+      customer_link = link_to customer.to_s, {:controller => 'customers', :action => 'show', :project_id => project, :id => customer }
+      data << "<td>#{customer_link unless customer.nil?}</td>"
     end
+    "<tr>#{data}<td></td></tr>"
   end
   
   # Renders a select tag with all the Customers
