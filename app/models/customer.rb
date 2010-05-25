@@ -2,7 +2,8 @@ class Customer < ActiveRecord::Base
   unloadable
 
   has_many :issues
-  belongs_to :project
+  has_many :customer_members, :dependent => :destroy
+  has_many :projects, :through => :customer_members
 
   acts_as_audited
   acts_as_customizable

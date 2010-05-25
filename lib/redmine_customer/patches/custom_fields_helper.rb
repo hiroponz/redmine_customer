@@ -1,4 +1,4 @@
-module CustomerPlugin
+module RedmineCustomer
   module Patches
     module CustomFieldsHelper
       def self.included(base)

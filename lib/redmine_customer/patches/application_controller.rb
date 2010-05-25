@@ -1,4 +1,4 @@
-module CustomerPlugin
+module RedmineCustomer
   module Patches
     module ApplicationController
       def current_user

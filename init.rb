@@ -12,20 +12,20 @@ require_dependency 'custom_value'
 require_dependency 'customer_issue_hook'
 require_dependency 'custom_fields_helper'
 
-require 'customer_plugin'
+require 'redmine_customer'
 
 Dispatcher.to_prepare do
-  Issue.send(:include, CustomerPlugin::Patches::Issue)
-  Project.send(:include, CustomerPlugin::Patches::Project)
-  Query.send(:include, CustomerPlugin::Patches::Query)
-  CustomValue.send(:include, CustomerPlugin::Patches::CustomValue)
-  ApplicationController.send(:include, CustomerPlugin::Patches::ApplicationController)
-  CustomFieldsHelper.send(:include, CustomerPlugin::Patches::CustomFieldsHelper)
+  Issue.send(:include, RedmineCustomer::Patches::Issue)
+  Project.send(:include, RedmineCustomer::Patches::Project)
+  Query.send(:include, RedmineCustomer::Patches::Query)
+  CustomValue.send(:include, RedmineCustomer::Patches::CustomValue)
+  ApplicationController.send(:include, RedmineCustomer::Patches::ApplicationController)
+  CustomFieldsHelper.send(:include, RedmineCustomer::Patches::CustomFieldsHelper)
 end
 
 RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
 
-Redmine::Plugin.register :customer_plugin do
+Redmine::Plugin.register :redmine_customer do
   name 'Customer plugin'
   author 'Eric Davis'
   description 'This is a plugin for Redmine that can be used to track basic customer information'
@@ -35,7 +35,7 @@ Redmine::Plugin.register :customer_plugin do
   url 'https://projects.littlestreamsoftware.com/projects/redmine-customers' if respond_to? :url
   author_url 'http://www.littlestreamsoftware.com' if respond_to? :author_url
 
-  project_module 'customer_plugin' do
+  project_module 'customer' do
     permission :manage_customers, :customers => [:new, :create, :edit, :update, :destroy]
     permission :view_customers, :customers => [:index, :show, :autocomplete, :mail], :public => true
   end
@@ -47,7 +47,7 @@ Redmine::Plugin.register :customer_plugin do
     :customers,
     {:controller => 'customers', :action => 'index'},
     :caption => lambda {
-      Setting.plugin_customer_plugin[:menu_caption].present? ? Setting.plugin_customer_plugin[:menu_caption] : I18n.t(:customer)
+      Setting.plugin_redmine_customer[:menu_caption].present? ? Setting.plugin_redmine_customer[:menu_caption] : I18n.t(:customer)
     },
     :param => :project_id,
     :after => :files

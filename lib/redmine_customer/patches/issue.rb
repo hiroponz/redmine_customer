@@ -1,4 +1,4 @@
-module CustomerPlugin
+module RedmineCustomer
   module Patches
     module Issue
       def self.included(base)
