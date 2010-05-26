@@ -53,4 +53,12 @@ module CustomersHelper
     },
     :class => 'icon icon-add'
   end
+
+  def customers_check_box_tags(name, customers)
+    s = ''
+    customers.sort.each do |customer|
+      s << "<label>#{ check_box_tag name, customer.id, false } #{h customer}</label>\n"
+    end
+    s 
+  end
 end

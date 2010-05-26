@@ -41,6 +41,10 @@ class Customer < ActiveRecord::Base
     all.collect {|customer| [customer.to_s, customer.id.to_s]}
   end
 
+  def <=>(rhs)
+    self.to_s <=> rhs.to_s
+  end
+
   private
 
   def audit_create

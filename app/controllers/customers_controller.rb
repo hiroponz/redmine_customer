@@ -11,9 +11,11 @@ class CustomersController < ApplicationController
   def index
     params[:filter] ||= {}
     if params[:q]
-      @customers = @project.customers.search params[:q]
+      @customers = @project.customers.search(params[:q])
+      @no_member_customers = Customer.search(params[:q]) - @customers
     else
       @customers = @project.customers.all(:conditions => conditions, :include => :custom_values)
+      @no_member_customers = Customer.all(:conditions => conditions, :include => :custom_values) - @customers
     end
   end
 
@@ -71,7 +73,18 @@ class CustomersController < ApplicationController
       else
         render :action => "new"
       end
+      return
     end
+
+    if params[:member] && request.post?
+      customers = []
+      customer_ids = params[:member][:customer_ids]
+      customer_ids.each do |customer_id|
+        customers << Customer.find(customer_id.to_i)
+      end
+      @project.customers << customers
+    end
+    redirect_to customers_url(:project_id => params[:project_id])
   end
 
   private
