@@ -1,0 +1,15 @@
+div.splitcontentleft {
+  width: 64%;
+}
+
+div.splitcontentright {
+  width: 34%;
+}
+
+a.icon-users {
+  background-image: url(../../../images/user.png);
+}
+
+fieldset {
+  margin-bottom: 20px;
+}

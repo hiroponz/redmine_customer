@@ -8,7 +8,5 @@
 <% end -%>
 
 <% content_for(:header_tags) do %>
-  <style type="text/css">
-    .icon-users { background-image: url(../../images/user.png); }
-  </style>
+  <%= stylesheet_link_tag "customer", :plugin => "redmine_customer" %>
 <% end %>

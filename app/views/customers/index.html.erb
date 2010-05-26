@@ -30,9 +30,6 @@
 </div>
 
 <% content_for(:header_tags) do %>
-  <style type="text/css">
-    .icon-users { background-image: url(../../images/user.png); }
-    fieldset { margin-bottom: 20px }
-  </style>
+  <%= stylesheet_link_tag "customer", :plugin => "redmine_customer" %>
 <% end %>
 
