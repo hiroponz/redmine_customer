@@ -8,11 +8,23 @@ This is a plugin for Redmine that can be used to track basic customer informatio
 * Associate a Customer for each project
 * Permissions to control user access to data
 
+== Install
+
+- Open a shell to your Redmine folder
+- script/plugin install git://github.com/collectiveidea/acts_as_audited.git
+- script/plugin install git://github.com/hiroponz/redmine_customer.git
+- rake db:migrate_plugins RAILS_ENV=production
+- Login to your Redmine install as an Administrator
+- Setup the permissions for your roles
+- Add the "Customer module" to the enabled modules for your project
+- The link to the plugin should appear on that project’s navigation as Customer 
+
 == License
 
 This plugin is licensed under the GNU GPL v2.  See LICENSE.txt and GPL.txt for details.
 
 == Author
+
 * Base code: Eric Davis,  Elomar França
 * Developed by: Hiroyuki Sato
 
