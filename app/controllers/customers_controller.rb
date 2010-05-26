@@ -48,7 +48,8 @@ class CustomersController < ApplicationController
   end
 
   def destroy
-    if @customer.destroy
+    customer_member = @customer.customer_members.find_by_project_id(@project)
+    if customer_member.destroy
       flash[:notice] = l(:notice_successful_delete)
     else
       flash[:error] = l(:notice_unsuccessful_save)
