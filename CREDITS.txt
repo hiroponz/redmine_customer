@@ -1,7 +1,7 @@
 Thanks go to the following people for patches and contributions:
 
 Eric Davis <edavis[AT]littlestreamsoftware[DOT]com>
-- Project Maintainer
+- Original Project Maintainer
 
 Michele Franzin
 - added Italian translation
@@ -10,3 +10,6 @@ Michele Franzin
 
 Pau Garcia i Quiles
 - Catalan translation
+
+Elomar França
+- Write base code of this project

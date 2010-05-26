@@ -1,7 +1,7 @@
 Redmine Customer is a Redmine plugin that can be used to track
 basic customer information.
 
-Copyright (C) 2007  Eric Davis, Little Stream Software
+Copyright (C) 2010  Hiroyuki Sato
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
