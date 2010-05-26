@@ -37,11 +37,13 @@ class CustomersController < ApplicationController
   end
 
   def update
-    if @customer.update_attributes(params[:customer])
-      flash[:notice] = l(:notice_successful_update)
-      redirect_to customer_url(@customer, :project_id => params[:project_id])
-    else
-      render :action => "edit", :project_id => params[:project_id], :id => params[:id]
+    if params[:customer] && request.put?
+      if @customer.update_attributes(params[:customer])
+        flash[:notice] = l(:notice_successful_update)
+        redirect_to customer_url(@customer, :project_id => params[:project_id])
+      else
+        render :action => "edit", :project_id => params[:project_id], :id => params[:id]
+      end
     end
   end
 
@@ -59,13 +61,15 @@ class CustomersController < ApplicationController
   end
 
   def create
-    @customer = Customer.new(params[:customer])
-    if @customer.save
-      @customer.projects << @project
-      flash[:notice] = l(:notice_successful_create)
-      redirect_to customer_url(@customer, :project_id => params[:project_id])
-    else
-      render :action => "new"
+    if params[:customer] && request.post?
+      @customer = Customer.new(params[:customer])
+      if @customer.save
+        @customer.projects << @project
+        flash[:notice] = l(:notice_successful_create)
+        redirect_to customer_url(@customer, :project_id => params[:project_id])
+      else
+        render :action => "new"
+      end
     end
   end
 
