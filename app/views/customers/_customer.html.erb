@@ -1,0 +1,12 @@
+<tr class="<%= cycle('odd', 'even') %>">
+  <td><%= link_to customer, customer_url(customer, :project_id => params[:project_id]) %></td>
+  <td align="right">
+    <small>
+      <%= link_to l(:button_edit), edit_customer_url(customer, :project_id => params[:project_id]), :class => 'icon icon-edit' %>
+      <%= link_to l(:button_delete), customer_url(customer, :project_id => params[:project_id]), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+      <%= link_to_tasks customer %>
+      <%= link_to_new_task customer %>
+    </small>
+  </td>
+</tr>
+
