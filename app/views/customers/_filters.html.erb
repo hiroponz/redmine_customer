@@ -3,19 +3,10 @@
   <fieldset class="collapsible collapsed">
     <legend onclick="toggleFieldset(this);"><%= l(:label_filter_plural) %></legend>
     <div style="display: none">
-      <p>
-        <%= label_tag 'filter[email]', t(:field_email) %>
-        <%= text_field_tag 'filter[email]', params[:filter][:email] %>
-      </p>
-      <% Customer.new.custom_field_values.map(&:custom_field).each do |custom| %>
-        <p>
-        <%= label_tag "filter[#{custom.id}]", custom.name %>
-        <% if custom.possible_values.present? %>
-          <%= select_tag "filter[#{custom.id}]", options_for_select([''] + custom.possible_values, params[:filter][custom.id.to_s])%>
-        <% else %>
-          <%= text_field_tag "filter[#{custom.id}]", params[:filter][custom.id.to_s] %>
-        <% end %>
-        </p>
+      <%= filter_by :name, t(:field_name) %>
+      <%= filter_by :email, t(:field_email) %>
+      <% Customer.new.custom_field_values.map(&:custom_field).each do |field| %>
+        <%= filter_by_custom field %>
       <% end %>
       <p>
         <%= submit_tag t(:label_customer_filter) %>

@@ -9,7 +9,6 @@ class CustomersController < ApplicationController
   helper :issues, :custom_fields
  
   def index
-    params[:filter] ||= {}
     if params[:q]
       @customers = @project.customers.search(params[:q])
       @no_member_customers = Customer.search(params[:q]) - @customers
@@ -90,15 +89,44 @@ class CustomersController < ApplicationController
   private
 
   def conditions
-    builder = ARCondition.new()
+    return if params[:filter].nil?
+    builder = ARCondition.new
     filter = params[:filter].dup
-    builder.add ["#{Customer.table_name}.name like ?", "%#{filter.delete(:name)}%"] 
-    builder.add ["#{Customer.table_name}.email like ?", "%#{filter.delete(:email)}%"] 
-    filter.each do |name, value|
-      builder.add ["#{CustomValue.table_name}.custom_field_id = ? and #{CustomValue.table_name}.value like ?", name, "%#{value}%"] if value.present?
+    builder.add attr_condition(filter, :name) unless filter[:name][:value].blank?
+    builder.add attr_condition(filter, :email) unless filter[:email][:value].blank?
+    filter.each do |id, options|
+      builder.add condition(id, options) unless options[:value].blank?
     end
     builder.conditions
   end
+
+  def attr_condition(filter, attr)
+    options = filter.delete(attr)
+    cond, value = apply(options[:operator], options[:value])
+    ["#{Customer.table_name}.#{attr} #{cond}", value]
+  end
+
+  def condition(id, options)
+    base = "#{CustomValue.table_name}.custom_field_id = ? and #{CustomValue.table_name}.value "
+    condition, value = apply(options[:operator], options[:value])
+    ["#{base} #{condition}", id, value]
+  end
+
+  def apply(operator, value)
+    case operator || "~"
+    when "="  then ["= ?", value]
+    when "!="  then ["<> ?", value]
+    when "!~" then ["not like ?", "%#{value}%"]
+    when "~"  then ["like ?", "%#{value}%"]
+    end
+  end
+
+  OPERATORS = {
+    '='  => :label_equals,
+    '!=' => :label_not_equals,
+    "~"  => :label_contains,
+    "!~" => :label_not_contains
+  }
 
   def find_project
     @project = Project.find(params[:project_id])
