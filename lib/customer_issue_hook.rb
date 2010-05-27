@@ -76,11 +76,13 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
   # * :project => Current project
   #
   def view_issues_bulk_edit_details_bottom(context = { })
-    if context[:project].module_enabled?('customer')
+    project = context[:project]
+    return if project.nil?
+    if project.module_enabled?('customer')
       select = select_tag('customer_id',
                                content_tag('option', l(:label_no_change_option), :value => '') +
                                content_tag('option', l(:label_none), :value => 'none') +
-                               options_from_collection_for_select(Customer.all, :id, :to_s))
+                               options_from_collection_for_select(project.customers, :id, :to_s))
 
       content_tag(:p, "<label>#{l(:label_customer)}</label>#{select}")
     end
