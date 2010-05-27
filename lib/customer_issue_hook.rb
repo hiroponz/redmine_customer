@@ -82,7 +82,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
                                content_tag('option', l(:label_none), :value => 'none') +
                                options_from_collection_for_select(Customer.all, :id, :to_s))
 
-      content_tag(:p, "<label>#{l(:customer_label)}: " + select + "</label>")
+      content_tag(:p, "<label>#{l(:label_customer)}</label>#{select}")
     end
   end
   
