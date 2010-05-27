@@ -11,8 +11,13 @@ module RedmineCustomer
 
       def available_filters_with_customer_filters
         return @available_filters if @available_filters
-        customer_filter = project.present? ? { "customer_id" => { :type => :list, :values => project.customers.list_for_select, :order => 30} } : {}
-        @available_filters = available_filters_without_customer_filters.merge(customer_filter)
+
+        @available_filters = available_filters_without_customer_filters
+        customers = project ? project.customers.list_for_select : Customer.list_for_select 
+        return @available_filters if customers.empty?
+
+        filter = { "customer_id" => { :type => :list, :values => customers, :order => 30} } 
+        @available_filters = @available_filters.merge(filter)
       end
 
       module ClassMethods
