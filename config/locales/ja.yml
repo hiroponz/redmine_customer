@@ -18,12 +18,12 @@ ja:
   label_customer_edit_information: 編集
   label_customer_view: 表示
   label_customer_list: 一覧
-  label_customer_new: 追加
+  label_customer_new: 新しい取引先
   label_send_email: メール送信
 
   label_customer_email_subject: 件名
   label_customer_email_body: 本文
-  label_customer_filter: Filter
+  label_customer_filter: 適用
 
   field_customer: 取引先
   field_customer_id: 取引先
