@@ -38,7 +38,7 @@ class CustomerIssueHook < Redmine::Hook::ViewListener
           new Ajax.Autocompleter(
             'customer_text',
             'customer_id_choices',
-            '#{url_for(:controller => 'customers', :action => 'autocomplete', :project_id => context[:project].id)}',
+            '#{url_for(:controller => 'customers', :action => 'autocomplete', :project_id => context[:project])}',
             {
               minChars: 0,
               frequency: 0.5,
