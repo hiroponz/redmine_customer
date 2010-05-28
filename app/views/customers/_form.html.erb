@@ -1,5 +1,20 @@
+<%= error_messages_for 'customer' %>
+
+<div class="box"> 
+  <p>
+    <label for="customer_name"><%=l(:field_name)%> <span class="required">*</span></label>
+    <%= text_field 'customer', 'name', :required => true -%>
+  </p>
+
+  <p>
+    <label for="customer_email"><%=l(:field_email)%></label>
+    <%= text_field 'customer', 'email' -%>
+  </p>
+
+  <%= render :partial => 'form_custom_fields', :locals => {:customer => @customer} %>
+</div>
+
 <% content_for :header_tags do %>
-  <%= stylesheet_link_tag 'form', :plugin => 'redmine_customer' %>
   <%= javascript_include_tag "jquery.min.js", "jquery.maskedinput.js", :plugin => 'redmine_customer' %>
   <% javascript_tag do %>
     jQuery.noConflict();
@@ -9,18 +24,4 @@
     });
   <% end %>
 <% end %>
-
-<%= error_messages_for 'customer' %>
-<%= hidden_field_tag :project_id, params[:project_id] %>
-
-<div class="box"> 
-  <p>
-    <%= f.text_field 'name', :required => true -%>
-  </p>
-  <p>
-    <%= f.text_field 'email', :label => :field_email -%>
-  </p>
-
-  <%= render :partial => 'form_custom_fields', :locals => {:customer => @customer} %>
-</div>
 

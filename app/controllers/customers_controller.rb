@@ -30,7 +30,7 @@ class CustomersController < ApplicationController
   def mail
     CustomerMailer.deliver_single_message(@customer, params)
     flash[:notice] = l(:notice_email_sent, @customer.email)
-    redirect_to customer_url(@customer, :project_id => params[:project_id])
+    redirect_to project_customer_url(@project, @customer)
   end
 
   def edit
@@ -41,7 +41,7 @@ class CustomersController < ApplicationController
     if params[:customer] && request.put?
       if @customer.update_attributes(params[:customer])
         flash[:notice] = l(:notice_successful_update)
-        redirect_to customer_url(@customer, :project_id => params[:project_id])
+        redirect_to project_customer_url(@project, @customer)
       else
         render :action => "edit", :project_id => params[:project_id], :id => params[:id]
       end
@@ -55,7 +55,7 @@ class CustomersController < ApplicationController
     else
       flash[:error] = l(:notice_unsuccessful_save)
     end
-    redirect_to customers_url(:project_id => params[:project_id])
+    redirect_to project_customers_url(@project)
   end
   
   def new
@@ -68,7 +68,7 @@ class CustomersController < ApplicationController
       if @customer.save
         @customer.projects << @project
         flash[:notice] = l(:notice_successful_create)
-        redirect_to customer_url(@customer, :project_id => params[:project_id])
+        redirect_to project_customer_url(@project, @customer)
       else
         render :action => "new"
       end
@@ -83,7 +83,7 @@ class CustomersController < ApplicationController
       end
       @project.customers << customers
     end
-    redirect_to customers_url(:project_id => params[:project_id])
+    redirect_to project_customers_url(@project)
   end
 
   private

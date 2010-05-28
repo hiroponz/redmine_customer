@@ -2,10 +2,10 @@
 
 <h2><%= l(:label_customer_new) %></h2>
 
-<% labelled_tabular_form_for @customer, @customer, {} do |f|  %>
-  <%= render :partial => 'form', :locals => {:f => f}  %>
-  <%= submit_tag l(:button_save) -%>
-<% end -%>
+<% form_tag({:controller => 'customers', :action => 'create'}, :class => "tabular", :multipart => true) do %>
+  <%= render :partial => 'form' %>
+  <%= submit_tag l(:button_create) %>
+<% end %>
 
 <% content_for(:header_tags) do %>
   <%= stylesheet_link_tag "customer", :plugin => "redmine_customer" %>

@@ -1,3 +1,5 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :customers, :member => ['mail'], :collection => ['autocomplete']
+  map.resources :projects do |project|
+    project.resources :customers, :member => {:mail => :post}
+  end
 end

@@ -13,7 +13,7 @@
 
     <% if @customer.email? %>
       <div class="email" style="display: none;">
-        <% form_tag mail_customer_url(@customer, :project_id => params[:project_id]) do %>
+        <% form_tag mail_project_customer_url(@project, @customer) do %>
           <p>
             <%= label_tag t(:label_customer_email_subject) %>: <br />
             <%= text_field_tag 'subject', nil, :size => 100 %>
@@ -36,7 +36,7 @@
         <p><%= custom_value.custom_field.name %>: <%= h custom_value.value %></p>
       <% end %>
       <p>
-        <%= link_to l(:button_edit), edit_customer_url(@customer, :project_id => params[:project_id]) %>
+        <%= link_to l(:button_edit), edit_project_customer_url(@project, @customer) %>
       </p>
     </div>
 

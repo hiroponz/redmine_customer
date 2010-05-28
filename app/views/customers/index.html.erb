@@ -19,8 +19,6 @@
     <% form_for(:member, :url => {:controller => 'customers', :action => 'create'}, :method => :post) do |f| %>
       <fieldset><legend><%=l(:label_member_new)%></legend>
 
-        <%= hidden_field_tag :project_id, @project.identifier %>
-
         <%= customers_check_box_tags 'member[customer_ids][]', @no_member_customers %>
 
         <p><%= submit_tag l(:button_add) %></p>
