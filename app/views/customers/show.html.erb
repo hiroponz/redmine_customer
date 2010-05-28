@@ -36,7 +36,8 @@
         <p><%= custom_value.custom_field.name %>: <%= h custom_value.value %></p>
       <% end %>
       <p>
-        <%= link_to l(:button_edit), edit_project_customer_url(@project, @customer) %>
+        <%= link_to l(:button_edit), edit_project_customer_url(@project, @customer), :class => 'icon icon-edit' %>
+        <%= link_to l(:button_delete), project_customer_url(@project, @customer), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
       </p>
     </div>
 

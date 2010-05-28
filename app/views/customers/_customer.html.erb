@@ -2,8 +2,6 @@
   <td><%= link_to customer, project_customer_url(@project, customer) %></td>
   <td align="right">
     <small>
-      <%= link_to l(:button_edit), edit_project_customer_url(@project, customer), :class => 'icon icon-edit' %>
-      <%= link_to l(:button_delete), project_customer_url(@project, customer), :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
       <%= link_to_tasks customer %>
       <%= link_to_new_task customer %>
     </small>
