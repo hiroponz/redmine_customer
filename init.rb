@@ -23,10 +23,10 @@ Dispatcher.to_prepare do
   CustomFieldsHelper.send(:include, RedmineCustomer::Patches::CustomFieldsHelper)
 end
 
-RAILS_DEFAULT_LOGGER.info 'Starting Customer plugin for RedMine'
+RAILS_DEFAULT_LOGGER.info 'Starting Redmine Customer plugin'
 
 Redmine::Plugin.register :redmine_customer do
-  name 'Customer plugin'
+  name 'Redmine Customer plugin'
   author 'Hiroyuki Sato'
   description 'This is a plugin for Redmine that can be used to track basic customer information'
   version '0.3.0'
@@ -40,15 +40,11 @@ Redmine::Plugin.register :redmine_customer do
     permission :view_customers, :customers => [:index, :show, :autocomplete, :mail], :public => true
   end
 
-  settings :default => {:menu_caption => ''}, :partial => 'customers/settings'
-
   menu(
     :project_menu,
     :customers,
     {:controller => 'customers', :action => 'index'},
-    :caption => lambda {
-      Setting.plugin_redmine_customer[:menu_caption].present? ? Setting.plugin_redmine_customer[:menu_caption] : I18n.t(:customer)
-    },
+    :caption => :customer,
     :param => :project_id,
     :after => :files
   )
