@@ -7,7 +7,7 @@
 <div class="splitcontentleft">
   <% if @customers.any? %>
     <table class="list members">
-      <%= render :partial => "customer", :collection => @customers %>
+      <%= render :partial => "list", :collection => @customers , :as => :customer %>
     </table>
   <% else %>
     <p class="nodata"><%=l(:label_no_data)%></p>
